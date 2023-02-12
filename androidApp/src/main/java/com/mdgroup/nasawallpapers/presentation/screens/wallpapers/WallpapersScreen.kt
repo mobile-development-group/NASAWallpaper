@@ -11,7 +11,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.mdgroup.nasawallpapers.core.platform.Logger
 import com.mdgroup.nasawallpapers.presentation.navigation.Router
+import com.mdgroup.nasawallpapers.presentation.utils.items
 import com.mdgroup.nasawallpapers.presentation.viewmodels.WallpapersViewModel
 import org.koin.androidx.compose.viewModel
 
@@ -19,9 +23,14 @@ import org.koin.androidx.compose.viewModel
 fun WallpapersScreen(navController: NavHostController) {
 
     val viewModel: WallpapersViewModel by viewModel()
-    val state = viewModel.state
+    val wallpapers = viewModel.wallpapers.collectAsLazyPagingItems()
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 64.dp),
+        contentAlignment = Alignment.Center
+    ) {
         Column(modifier = Modifier.fillMaxHeight()) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
@@ -29,20 +38,26 @@ fun WallpapersScreen(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(state.wallpapers.size) { index ->
+                items(items = wallpapers) { item, index ->
+                    Logger.print("Paging index: $index")
                     WallpaperItem(
                         modifier = Modifier.clickable {
-                            navController.navigate(Router.WALLPAPER + "/${state.wallpapers[index].date}")
+                            navController.navigate(Router.WALLPAPER + "/${item.date}")
                         },
-                        wallpaper = state.wallpapers[index],
-                        isLast = state.wallpapers.lastIndex == index
+                        wallpaper = item
                     )
                 }
             }
         }
 
-        if (state.isLoading) {
-            CircularProgressIndicator(color = MaterialTheme.colors.primaryVariant)
+        when (val state = wallpapers.loadState.refresh) {
+            is LoadState.NotLoading -> Unit
+            is LoadState.Loading -> {
+                CircularProgressIndicator(color = MaterialTheme.colors.primaryVariant)
+            }
+            is LoadState.Error -> {
+                //TODO показываем ошибку из state
+            }
         }
     }
 }

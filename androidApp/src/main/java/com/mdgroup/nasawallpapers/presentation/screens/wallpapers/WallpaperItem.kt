@@ -21,7 +21,7 @@ import com.mdgroup.nasawallpapers.domain.models.WallpaperModel
 import org.koin.androidx.compose.inject
 
 @Composable
-internal fun WallpaperItem(modifier: Modifier = Modifier, wallpaper: WallpaperModel, isLast: Boolean) {
+internal fun WallpaperItem(modifier: Modifier = Modifier, wallpaper: WallpaperModel) {
 
     val imageLoader: ImageLoader by inject()
 

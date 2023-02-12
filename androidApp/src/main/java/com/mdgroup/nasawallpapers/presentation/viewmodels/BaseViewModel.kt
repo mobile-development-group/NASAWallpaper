@@ -1,6 +1,7 @@
 package com.mdgroup.nasawallpapers.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
+import com.mdgroup.nasawallpapers.core.platform.Logger
 import kotlinx.coroutines.*
 
 abstract class BaseViewModel : ViewModel() {
@@ -10,9 +11,7 @@ abstract class BaseViewModel : ViewModel() {
     private val parentJob by lazy { SupervisorJob() }
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        // TODO переписать на кастомный логгер
-//        Logger.e(exception.message.toString())
-        exception.printStackTrace()
+        exceptionHandler(exception)
     }
 
     private val scope: CoroutineScope by lazy { CoroutineScope(parentJob + coroutineExceptionHandler) }
@@ -29,4 +28,8 @@ abstract class BaseViewModel : ViewModel() {
     open fun showLoading() {}
 
     open fun hideLoading() {}
+
+    open fun exceptionHandler(exception: Throwable) {
+        Logger.tag("CoroutineExceptionHandler").e(exception)
+    }
 }
