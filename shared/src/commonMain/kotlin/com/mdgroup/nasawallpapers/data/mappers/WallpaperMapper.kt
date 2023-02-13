@@ -10,10 +10,10 @@ object WallpaperMapper {
             response.copyright,
             response.date,
             response.explanation,
-            response.hdurl,
+            response.hdurl ?: "",
             response.mediaType,
             response.serviceVersion,
-            response.title,
+            response.title ?: "",
             response.url
         )
     }

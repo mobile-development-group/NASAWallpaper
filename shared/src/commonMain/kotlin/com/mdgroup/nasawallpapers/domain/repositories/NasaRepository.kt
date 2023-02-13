@@ -8,4 +8,7 @@ interface NasaRepository {
 
     @Throws(Exception::class)
     suspend fun fetch(date: DateModel): Result<WallpaperModel>
+
+    @Throws(Exception::class)
+    suspend fun fetch(from: DateModel, to: DateModel): Result<List<WallpaperModel>>
 }

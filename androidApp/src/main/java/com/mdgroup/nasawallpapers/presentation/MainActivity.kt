@@ -18,11 +18,13 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.mdgroup.nasawallpapers.presentation.navigation.GraphFactory
 import com.mdgroup.nasawallpapers.presentation.navigation.NavigationItem
 import com.mdgroup.nasawallpapers.presentation.screens.wallpapers.WallpapersGraph
 
 @ExperimentalMaterialApi
+@ExperimentalPermissionsApi
 class MainActivity : ComponentActivity() {
 
     var currentTab by mutableStateOf(
@@ -122,6 +124,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @ExperimentalMaterialApi
+@ExperimentalPermissionsApi
 @Preview
 @Composable
 fun DefaultPreview() {

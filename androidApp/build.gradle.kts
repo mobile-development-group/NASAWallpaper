@@ -60,6 +60,7 @@ dependencies {
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.paging:paging-compose:1.0.0-alpha18")
+    implementation("com.google.accompanist:accompanist-permissions:0.29.1-alpha")
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:$NAVIGATION_VERSION")

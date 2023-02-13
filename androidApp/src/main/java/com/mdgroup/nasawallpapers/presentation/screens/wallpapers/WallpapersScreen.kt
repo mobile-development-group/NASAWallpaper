@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.mdgroup.nasawallpapers.core.platform.Logger
 import com.mdgroup.nasawallpapers.presentation.navigation.Router
 import com.mdgroup.nasawallpapers.presentation.utils.items
 import com.mdgroup.nasawallpapers.presentation.viewmodels.WallpapersViewModel
@@ -28,7 +27,7 @@ fun WallpapersScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = 64.dp),
+            .padding(bottom = 56.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(modifier = Modifier.fillMaxHeight()) {
@@ -38,8 +37,7 @@ fun WallpapersScreen(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                items(items = wallpapers) { item, index ->
-                    Logger.print("Paging index: $index")
+                items(items = wallpapers) { item, _ ->
                     WallpaperItem(
                         modifier = Modifier.clickable {
                             navController.navigate(Router.WALLPAPER + "/${item.date}")

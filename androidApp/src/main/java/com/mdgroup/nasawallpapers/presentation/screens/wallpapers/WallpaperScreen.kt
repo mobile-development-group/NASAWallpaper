@@ -1,5 +1,6 @@
 package com.mdgroup.nasawallpapers.presentation.screens.wallpapers
 
+import android.app.WallpaperManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -9,12 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.mdgroup.nasawallpapers.R
+import com.mdgroup.nasawallpapers.core.utils.nullIfEmpty
 import com.mdgroup.nasawallpapers.presentation.viewmodels.WallpaperViewModel
 import org.koin.androidx.compose.inject
 import org.koin.androidx.compose.viewModel
@@ -23,18 +27,22 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun WallpaperScreen(navController: NavHostController, date: String?) {
 
+    val context = LocalContext.current
+
     val imageLoader: ImageLoader by inject()
 
     val viewModel: WallpaperViewModel by viewModel {
         parametersOf(date)
     }
     val state = viewModel.state
+    val isSaved = state.wallpaper?.uri != null
+
     Box {
         state.wallpaper?.let { wallpaper ->
             LazyColumn(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .padding(bottom = 64.dp),
+                    .padding(bottom = 56.dp),
                 horizontalAlignment = Alignment.Start
             ) {
                 item {
@@ -49,7 +57,7 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                     )
                 }
 
-                wallpaper.title?.let {
+                wallpaper.title.nullIfEmpty()?.let {
                     item {
                         Text(
                             text = it,
@@ -73,6 +81,52 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                     }
                 }
 
+                item {
+                    Row(modifier = Modifier
+                        .padding(top = 8.dp)
+                        .padding(horizontal = 16.dp)
+                        .height(32.dp)
+                    ) {
+                        if (state.isLoading) {
+                            CircularProgressIndicator(color = MaterialTheme.colors.primaryVariant)
+                        } else {
+                            if (!isSaved) {
+                                IconButton(onClick = {
+                                    viewModel.save(context)
+                                }) {
+                                    Icon(
+                                        painterResource(id = R.drawable.ic_save),
+                                        contentDescription = stringResource(id = R.string.save_content_description),
+                                        modifier = Modifier.size(24.dp),
+                                        tint = MaterialTheme.colors.primaryVariant
+                                    )
+                                }
+                            }
+                            IconButton(onClick = {
+                                viewModel.share(context)
+                            }) {
+                                Icon(
+                                    painterResource(id = R.drawable.ic_share),
+                                    contentDescription = stringResource(id = R.string.share_content_description),
+                                    modifier = Modifier.size(24.dp),
+                                    tint = MaterialTheme.colors.primaryVariant
+                                )
+                            }
+                            IconButton(onClick = {
+                                val wallpaperManager = WallpaperManager.getInstance(context)
+                                viewModel.setAsWallpaper(context, wallpaperManager)
+                            }) {
+                                Icon(
+                                    painterResource(id = R.drawable.ic_phone_fill),
+                                    contentDescription = stringResource(id = R.string.as_wallpaper_content_description),
+                                    modifier = Modifier.size(24.dp),
+                                    tint = MaterialTheme.colors.primaryVariant
+                                )
+                            }
+                        }
+                    }
+                }
+
                 wallpaper.explanation?.let {
                     item {
                         Text(
@@ -88,7 +142,7 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                 wallpaper.copyright?.let {
                     item {
                         Text(
-                            text = "@ $it",
+                            text = "Copyright belongs to $it",
                             style = MaterialTheme.typography.body2,
                             modifier = Modifier
                                 .padding(top = 16.dp)
@@ -96,10 +150,6 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                         )
                     }
                 }
-            }
-
-            if (state.isLoading) {
-                CircularProgressIndicator(color = MaterialTheme.colors.primaryVariant)
             }
         }
 

@@ -90,7 +90,7 @@ private fun HeaderViewLightPreview() {
                 }) {
                     Icon(
                         painterResource(id = R.drawable.ic_save),
-                        stringResource(R.string.save),
+                        stringResource(R.string.save_content_description),
                         modifier = Modifier.size(24.dp),
                         tint = MaterialTheme.colors.primaryVariant
                     )

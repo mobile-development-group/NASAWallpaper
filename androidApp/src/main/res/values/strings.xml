@@ -37,8 +37,12 @@
     <string name="ok">OK</string>
 
     <!--Content description-->
-    <string name="save">Save</string>
+    <string name="save_content_description">Save</string>
+    <string name="share_content_description">Share</string>
+    <string name="as_wallpaper_content_description">Set as wallpaper</string>
     <string name="preview_content_description">Preview</string>
     <string name="back_content_description">Back</string>
     <string name="app_icon_content_description">App icon</string>
+
+    <string name="send_mail">Sending a message…</string>
 </resources>

@@ -7,9 +7,11 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.mdgroup.nasawallpapers.presentation.navigation.Router
 
 @ExperimentalMaterialApi
+@ExperimentalPermissionsApi
 @Composable
 fun WallpapersGraph(navController: NavHostController) {
     NavHost(navController, startDestination = Router.WALLPAPERS) {

@@ -1,6 +1,5 @@
 package com.mdgroup.nasawallpapers.presentation.screens.wallpapers
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,7 +25,7 @@ internal fun WallpaperItem(modifier: Modifier = Modifier, wallpaper: WallpaperMo
     val imageLoader: ImageLoader by inject()
 
     Card(
-        modifier = modifier.height(170.dp),
+        modifier = modifier.height(250.dp),
         shape = MaterialTheme.shapes.medium,
         elevation = 4.dp
     ) {

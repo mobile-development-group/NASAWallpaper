@@ -2,6 +2,7 @@ package com.mdgroup.nasawallpapers.domain
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.mdgroup.nasawallpapers.core.platform.Logger
 import com.mdgroup.nasawallpapers.domain.interactors.NasaInteractor
 import com.mdgroup.nasawallpapers.domain.models.DateModel
 import com.mdgroup.nasawallpapers.domain.models.WallpaperModel
@@ -18,22 +19,25 @@ class WallpapersPagingSource(private val interactor: NasaInteractor) : PagingSou
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, WallpaperModel> {
         return try {
             val page = params.key ?: 0
-
-            val list = mutableListOf<WallpaperModel>()
-            for (i in 0..params.loadSize) {
+            if (page != 0) {
                 calendar.add(Calendar.DATE, -1)
+            }
+            val endDate = makeDateModel(calendar)
+            calendar.add(Calendar.DATE, -1 * params.loadSize)
+            val startDate = makeDateModel(calendar)
 
-                val response = interactor.fetch(makeDateModel(calendar))
-                if (response.isSuccess) {
-                    response.data?.let { list.add(it) }
+            val response = interactor.fetch(startDate, endDate)
+            if (response.isSuccess) {
+                response.data?.let {
+                    return LoadResult.Page(
+                        data = it,
+                        prevKey = if (page == 0) null else page.minus(1),
+                        nextKey = page.plus(1),
+                    )
                 }
             }
 
-            LoadResult.Page(
-                data = list,
-                prevKey = if (page == 0) null else page.minus(1),
-                nextKey = page.plus(1),
-            )
+            LoadResult.Error(Throwable(response.ex))
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
