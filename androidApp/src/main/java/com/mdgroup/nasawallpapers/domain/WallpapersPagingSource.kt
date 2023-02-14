@@ -2,15 +2,15 @@ package com.mdgroup.nasawallpapers.domain
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.mdgroup.nasawallpapers.core.platform.Logger
-import com.mdgroup.nasawallpapers.domain.interactors.NasaInteractor
+import com.mdgroup.nasawallpapers.domain.interactors.WallpaperInteractor
 import com.mdgroup.nasawallpapers.domain.models.DateModel
 import com.mdgroup.nasawallpapers.domain.models.WallpaperModel
+import java.time.ZoneId
 import java.util.*
 
-class WallpapersPagingSource(private val interactor: NasaInteractor) : PagingSource<Int, WallpaperModel>() {
+class WallpapersPagingSource(private val interactor: WallpaperInteractor) : PagingSource<Int, WallpaperModel>() {
 
-    private val calendar = Calendar.getInstance()
+    private val calendar = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"))
 
     override fun getRefreshKey(state: PagingState<Int, WallpaperModel>): Int? {
         return null

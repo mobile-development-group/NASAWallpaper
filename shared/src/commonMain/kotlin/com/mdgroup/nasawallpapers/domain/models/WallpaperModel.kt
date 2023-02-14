@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WallpaperModel(
     val copyright: String?,
-    val date: String?,
+    val date: String,
     val explanation: String?,
     val hdurl: String,
     val mediaType: String?,
@@ -13,5 +13,10 @@ data class WallpaperModel(
     val title: String,
     val url: String?,
 
-    val uri: String? = null
-)
+    var uri: String? = null
+) {
+    fun dateModel(): DateModel {
+        val data = date.split("-")
+        return DateModel(data[0].toInt(), data[1].toInt(), data[2].toInt())
+    }
+}

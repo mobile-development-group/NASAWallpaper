@@ -9,7 +9,7 @@ data class WallpaperResponse(
     @SerialName("copyright")
     val copyright: String? = null,
     @SerialName("date")
-    val date: String?,
+    val date: String,
     @SerialName("explanation")
     val explanation: String?,
     @SerialName("hdurl")

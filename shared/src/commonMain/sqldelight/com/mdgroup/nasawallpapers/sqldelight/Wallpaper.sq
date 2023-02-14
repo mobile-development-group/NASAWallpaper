@@ -1,0 +1,27 @@
+CREATE TABLE WallpaperEntity (
+  copyright TEXT,
+  date TEXT NOT NULL PRIMARY KEY,
+  explanation TEXT,
+  hdurl TEXT,
+  mediaType TEXT,
+  serviceVersion TEXT,
+  title TEXT,
+  url TEXT,
+  uri TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM WallpaperEntity;
+
+selectByDate:
+SELECT * FROM WallpaperEntity WHERE date = ?;
+
+insert:
+INSERT INTO WallpaperEntity (copyright, date, explanation, hdurl, mediaType, serviceVersion, title, url, uri)
+VALUES (?, ?,?,?,?,?,?,?,?);
+
+delete:
+DELETE FROM WallpaperEntity WHERE date = ?;
+
+clear:
+DELETE FROM WallpaperEntity;

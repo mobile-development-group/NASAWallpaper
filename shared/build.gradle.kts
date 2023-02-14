@@ -1,12 +1,16 @@
 import Version.COROUTINES_VERSION
 import Version.KOIN_VERSION
 import Version.KTOR_VERSION
+import Version.SQL_DELIGHT_VERSION
 
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("kotlinx-serialization")
     id("kotlin-parcelize")
+
+    // SQLDelight
+    id("app.cash.sqldelight") version "2.0.0-alpha05"
 }
 
 kotlin {
@@ -58,6 +62,9 @@ kotlin {
             dependencies {
                 // Network
                 implementation("io.ktor:ktor-client-okhttp:$KTOR_VERSION")
+
+                // SQLDelight
+                implementation("app.cash.sqldelight:android-driver:$SQL_DELIGHT_VERSION")
             }
         }
         val androidUnitTest by getting
@@ -70,6 +77,9 @@ kotlin {
             dependencies {
                 //Network
                 implementation("io.ktor:ktor-client-ios:$KTOR_VERSION")
+
+                // SQLDelight
+                implementation("app.cash.sqldelight:native-driver:$SQL_DELIGHT_VERSION")
             }
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -93,5 +103,13 @@ android {
     defaultConfig {
         minSdk = 24
         targetSdk = 33
+    }
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.mdgroup.nasawallpapers.sqldelight")
+        }
     }
 }

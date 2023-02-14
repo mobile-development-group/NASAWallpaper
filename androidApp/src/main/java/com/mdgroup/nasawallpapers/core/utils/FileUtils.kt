@@ -19,6 +19,7 @@ import java.io.*
 import java.net.URL
 import java.util.*
 
+
 object FileUtils {
 
     private const val maxSize = 1024
@@ -255,30 +256,26 @@ object FileUtils {
     }
 
     @Throws(IOException::class)
-    fun createBitmapFromUri(context: Context, selectedImage: Uri): Bitmap? {
-        val options = BitmapFactory.Options()
-        options.inJustDecodeBounds = true
-        val file = File(selectedImage.toString())
-        return if (file.exists()) {
-            var fileInputStream = FileInputStream(file)
-            BitmapFactory.decodeStream(fileInputStream, null, options)
-            fileInputStream.close()
-
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false
-            fileInputStream = FileInputStream(file)
-            BitmapFactory.decodeStream(fileInputStream, null, options)
-        } else {
-            var imageStream = context.contentResolver.openInputStream(selectedImage)
-            BitmapFactory.decodeStream(imageStream, null, options)
-            imageStream!!.close()
-
-            // Decode bitmap with inSampleSize set
-            options.inJustDecodeBounds = false
-            imageStream = context.contentResolver.openInputStream(selectedImage)
-            BitmapFactory.decodeStream(imageStream, null, options)
+    fun bitmapFromUri(context: Context, uri: Uri): Bitmap? {
+        var inputStream: InputStream? = null
+        return try {
+            inputStream = context.contentResolver.openInputStream(uri)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            null
+        } finally {
+            inputStream?.close()
         }
     }
+
+    //    fun bitmapFromUri(context: Context, uri: Uri): Bitmap? {
+    //        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+    //            ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, uri))
+    //        } else {
+    //            MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
+    //        }
+    //    }
 
     fun saveFileToLocal(context: Context, path: Uri, outOfMemoryError: String): File? {
         context.contentResolver?.let { contentResolver ->

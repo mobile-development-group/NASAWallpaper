@@ -1,6 +1,8 @@
 package com.mdgroup.nasawallpapers.presentation.screens.wallpapers
 
 import android.app.WallpaperManager
+import android.net.Uri
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -9,6 +11,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -18,6 +21,7 @@ import androidx.navigation.NavHostController
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.mdgroup.nasawallpapers.R
+import com.mdgroup.nasawallpapers.core.utils.FileUtils
 import com.mdgroup.nasawallpapers.core.utils.nullIfEmpty
 import com.mdgroup.nasawallpapers.presentation.viewmodels.WallpaperViewModel
 import org.koin.androidx.compose.inject
@@ -46,15 +50,28 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                 horizontalAlignment = Alignment.Start
             ) {
                 item {
-                    AsyncImage(
-                        model = wallpaper.url,
-                        contentDescription = wallpaper.title,
-                        imageLoader = imageLoader,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(400.dp),
-                        contentScale = ContentScale.Crop
-                    )
+                    wallpaper.uri?.let { uri ->
+                        FileUtils.bitmapFromUri(context, Uri.parse(uri))?.asImageBitmap()?.let {
+                            Image(
+                                bitmap = it,
+                                contentDescription = wallpaper.title,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(400.dp),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+                    } ?: run {
+                        AsyncImage(
+                            model = wallpaper.url,
+                            contentDescription = wallpaper.title,
+                            imageLoader = imageLoader,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(400.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
 
                 wallpaper.title.nullIfEmpty()?.let {
@@ -69,16 +86,14 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                     }
                 }
 
-                wallpaper.date?.let {
-                    item {
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.body2,
-                            modifier = Modifier
-                                .padding(top = 8.dp)
-                                .padding(horizontal = 16.dp),
-                        )
-                    }
+                item {
+                    Text(
+                        text = wallpaper.date,
+                        style = MaterialTheme.typography.body2,
+                        modifier = Modifier
+                            .padding(top = 8.dp)
+                            .padding(horizontal = 16.dp),
+                    )
                 }
 
                 item {
@@ -88,19 +103,17 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                         .height(32.dp)
                     ) {
                         if (state.isLoading) {
-                            CircularProgressIndicator(color = MaterialTheme.colors.primaryVariant)
+                            CircularProgressIndicator(modifier = Modifier.size(24.dp), color = MaterialTheme.colors.primaryVariant)
                         } else {
-                            if (!isSaved) {
-                                IconButton(onClick = {
-                                    viewModel.save(context)
-                                }) {
-                                    Icon(
-                                        painterResource(id = R.drawable.ic_save),
-                                        contentDescription = stringResource(id = R.string.save_content_description),
-                                        modifier = Modifier.size(24.dp),
-                                        tint = MaterialTheme.colors.primaryVariant
-                                    )
-                                }
+                            IconButton(onClick = {
+                                viewModel.save(context)
+                            }) {
+                                Icon(
+                                    painterResource(id = if (isSaved) R.drawable.ic_bookmark_fill else R.drawable.ic_bookmark),
+                                    contentDescription = stringResource(id = R.string.save_content_description),
+                                    modifier = Modifier.size(24.dp),
+                                    tint = MaterialTheme.colors.primaryVariant
+                                )
                             }
                             IconButton(onClick = {
                                 viewModel.share(context)

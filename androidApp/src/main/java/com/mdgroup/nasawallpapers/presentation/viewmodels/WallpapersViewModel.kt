@@ -5,9 +5,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.mdgroup.nasawallpapers.domain.WallpapersPagingSource
-import com.mdgroup.nasawallpapers.domain.interactors.NasaInteractor
+import com.mdgroup.nasawallpapers.domain.interactors.WallpaperInteractor
 
-class WallpapersViewModel(private val interactor: NasaInteractor) : BaseViewModel() {
+class WallpapersViewModel(private val interactor: WallpaperInteractor) : BaseViewModel() {
 
     val wallpapers = Pager(PagingConfig(pageSize = 1, prefetchDistance = 4)) {
         WallpapersPagingSource(interactor)

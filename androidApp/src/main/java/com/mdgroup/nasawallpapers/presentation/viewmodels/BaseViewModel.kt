@@ -6,6 +6,7 @@ import kotlinx.coroutines.*
 
 abstract class BaseViewModel : ViewModel() {
 
+    val main = Dispatchers.Main
     val background = Dispatchers.Default
 
     private val parentJob by lazy { SupervisorJob() }
@@ -24,6 +25,11 @@ abstract class BaseViewModel : ViewModel() {
         start: CoroutineStart = CoroutineStart.DEFAULT,
         block: suspend CoroutineScope.() -> Unit
     ): Job = scope.launch(background, start, block)
+
+    fun onUiScope(
+        start: CoroutineStart = CoroutineStart.DEFAULT,
+        block: suspend CoroutineScope.() -> Unit
+    ): Job = scope.launch(main, start, block)
 
     open fun showLoading() {}
 

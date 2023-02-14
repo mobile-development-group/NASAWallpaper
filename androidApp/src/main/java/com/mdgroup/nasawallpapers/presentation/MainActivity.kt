@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.mdgroup.nasawallpapers.presentation.navigation.GraphFactory
 import com.mdgroup.nasawallpapers.presentation.navigation.NavigationItem
+import com.mdgroup.nasawallpapers.presentation.screens.bookmarks.BookmarksGraph
 import com.mdgroup.nasawallpapers.presentation.screens.wallpapers.WallpapersGraph
 
 @ExperimentalMaterialApi
-@ExperimentalPermissionsApi
 class MainActivity : ComponentActivity() {
 
     var currentTab by mutableStateOf(
@@ -70,16 +70,23 @@ class MainActivity : ComponentActivity() {
                     WallpapersGraph(navController)
                 }
             }
-            //            NavigationItem.Saved.route ->
-            //            NavigationItem.Settings.route -> {
-            //                // Надстройка статуса для соответствия iOS
-            //                if (!isSystemInDarkTheme())
-            //                    window.statusBarColor = MaterialTheme.colors.background.toArgb()
-            //
-            //                GraphFactory(navState = settingsNavState) { navController ->
-            //                    SettingsGraph(navController, bottomSheetController)
-            //                }
-            //            }
+            NavigationItem.Bookmarks.route -> {
+                GraphFactory(navState = settingsNavState) { navController ->
+                    BookmarksGraph(navController)
+                }
+            }
+            NavigationItem.Calendar.route -> {
+
+            }
+            NavigationItem.Settings.route -> {
+                //                // Надстройка статуса для соответствия iOS
+                //                if (!isSystemInDarkTheme())
+                //                    window.statusBarColor = MaterialTheme.colors.background.toArgb()
+                //
+                //                GraphFactory(navState = settingsNavState) { navController ->
+                //                    SettingsGraph(navController, bottomSheetController)
+                //                }
+            }
         }
     }
 
@@ -87,7 +94,7 @@ class MainActivity : ComponentActivity() {
     fun BottomNavigationBar(route: String, onClick: (String) -> Unit) {
         val items = listOf(
             NavigationItem.Wallpapers,
-            NavigationItem.Saved,
+            NavigationItem.Bookmarks,
             NavigationItem.Settings
         )
 

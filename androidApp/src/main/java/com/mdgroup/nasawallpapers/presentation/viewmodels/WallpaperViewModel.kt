@@ -7,14 +7,15 @@ import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.mdgroup.nasawallpapers.core.platform.Logger
 import com.mdgroup.nasawallpapers.core.utils.FileUtils
 import com.mdgroup.nasawallpapers.core.utils.IntentUtils
-import com.mdgroup.nasawallpapers.domain.interactors.NasaInteractor
+import com.mdgroup.nasawallpapers.domain.interactors.WallpaperInteractor
 import com.mdgroup.nasawallpapers.domain.models.DateModel
 import com.mdgroup.nasawallpapers.domain.models.WallpaperModel
 import java.util.*
 
-class WallpaperViewModel(private val date: String?, private val resources: Resources, private val interactor: NasaInteractor) : BaseViewModel() {
+class WallpaperViewModel(private val date: String?, private val resources: Resources, private val interactor: WallpaperInteractor) : BaseViewModel() {
 
     data class State(
         val isLoading: Boolean = true,
@@ -46,13 +47,21 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
     }
 
     fun save(context: Context) {
-        state.wallpaper?.let {
-            showLoading()
+        val wallpaper = state.wallpaper
+        wallpaper?.let {
+            wallpaper.uri?.let {
+                interactor.delete(wallpaper.dateModel())
+            } ?: run {
+                showLoading()
 
-            onBackgroundScope {
-                val uri = FileUtils.saveFileUsingMediaStore(context, it.hdurl, it.title)
-                state = state.copy(isLoading = false, wallpaper = it.copy(uri = uri.toString()))
-                //TODO тут сохранить в БД
+                onBackgroundScope {
+                    val uri = FileUtils.saveFileUsingMediaStore(context, it.hdurl, it.title)
+
+                    wallpaper.uri = uri.toString()
+                    interactor.save(wallpaper)
+
+                    state = state.copy(isLoading = false, wallpaper = wallpaper)
+                }
             }
         }
     }
@@ -74,24 +83,29 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
     }
 
     fun setAsWallpaper(context: Context, wallpaperManager: WallpaperManager) {
-        state.wallpaper?.let { wallpaper ->
-            wallpaper.uri?.let {
-                setupWallpaper(context, wallpaperManager, Uri.parse(it))
-            } ?: run {
-                showLoading()
-                onBackgroundScope {
+        onBackgroundScope {
+            showLoading()
+            state.wallpaper?.let { wallpaper ->
+                wallpaper.uri?.let {
+                    setupWallpaper(context, wallpaperManager, Uri.parse(it))
+                    hideLoading()
+                } ?: run {
                     FileUtils.saveFileUsingMediaStore(context, wallpaper.hdurl, wallpaper.title)?.let { uri ->
                         setupWallpaper(context, wallpaperManager, uri)
+                        hideLoading()
                     }
-                    hideLoading()
                 }
             }
         }
     }
 
     private fun setupWallpaper(context: Context, wallpaperManager: WallpaperManager, uri: Uri) {
-        val bitmap = FileUtils.createBitmapFromUri(context, uri)
-        wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK or WallpaperManager.FLAG_SYSTEM)
+        try {
+            val bitmap = FileUtils.bitmapFromUri(context, uri)
+            wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK or WallpaperManager.FLAG_SYSTEM)
+        } catch (exception: Exception) {
+            Logger.e(exception)
+        }
     }
 
     private fun fetchWallpaper(date: DateModel) {
@@ -99,7 +113,9 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
             val response = interactor.fetch(date)
             if (response.isSuccess) {
                 response.data?.let {
-                    state = state.copy(isLoading = false, wallpaper = it)
+                    onUiScope {
+                        state = State(isLoading = false, wallpaper = it)
+                    }
                 }
             } else {
                 hideLoading()

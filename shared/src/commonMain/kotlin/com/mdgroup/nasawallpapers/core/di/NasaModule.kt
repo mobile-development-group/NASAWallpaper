@@ -1,15 +1,16 @@
 package com.mdgroup.nasawallpapers.core.di
 
 import com.mdgroup.nasawallpapers.data.network.ApiInterface
-import com.mdgroup.nasawallpapers.data.repositories.NasaRepositoryImpl
-import com.mdgroup.nasawallpapers.domain.interactors.NasaInteractor
-import com.mdgroup.nasawallpapers.domain.interactors.NasaInteractorImpl
-import com.mdgroup.nasawallpapers.domain.repositories.NasaRepository
+import com.mdgroup.nasawallpapers.data.repositories.WallpaperRepositoryImpl
+import com.mdgroup.nasawallpapers.domain.interactors.WallpaperInteractor
+import com.mdgroup.nasawallpapers.domain.interactors.WallpaperInteractorImpl
+import com.mdgroup.nasawallpapers.domain.repositories.WallpaperRepository
+import com.mdgroup.nasawallpapers.sqldelight.Database
 import org.koin.dsl.module
 
 val nasaModule = module {
 
-    single<NasaRepository> { NasaRepositoryImpl(get<ApiInterface>()) }
+    single<WallpaperRepository> { WallpaperRepositoryImpl(get<ApiInterface>(), get<Database>()) }
 
-    single<NasaInteractor> { NasaInteractorImpl(get<NasaRepository>()) }
+    single<WallpaperInteractor> { WallpaperInteractorImpl(get<WallpaperRepository>()) }
 }

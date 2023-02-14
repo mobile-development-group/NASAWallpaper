@@ -6,6 +6,7 @@ object Version {
     const val MULTIPLATFORM_VERSION = "0.8.1"
     const val FIREBASE_VERSION = "30.0.0"
     const val PLAY_SERVICES_AUTH_VERSION = "20.1.0"
+    const val SQL_DELIGHT_VERSION = "2.0.0-alpha05"
 
     object Android {
 
