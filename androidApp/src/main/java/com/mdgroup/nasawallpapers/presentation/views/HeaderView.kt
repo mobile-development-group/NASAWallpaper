@@ -89,7 +89,7 @@ private fun LightPreview() {
 
                 }) {
                     Icon(
-                        painterResource(id = R.drawable.ic_save),
+                        painterResource(id = R.drawable.ic_calendar),
                         stringResource(R.string.save_content_description),
                         modifier = Modifier.size(24.dp),
                         tint = MaterialTheme.colors.primaryVariant

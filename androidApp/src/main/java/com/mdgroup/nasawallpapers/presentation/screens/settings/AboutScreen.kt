@@ -20,6 +20,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -55,8 +56,7 @@ fun AboutScreen(navController: NavHostController) {
             item {
                 ResourcesCompat.getDrawable(
                     LocalContext.current.resources,
-                    // TODO setup R.mipmap.ic_launcher,
-                    R.drawable.ic_save,
+                    R.drawable.ic_launcher_playstore,
                     LocalContext.current.theme
                 )?.let { drawable ->
                     val bitmap = Bitmap.createBitmap(
@@ -72,6 +72,7 @@ fun AboutScreen(navController: NavHostController) {
                         contentDescription = stringResource(id = R.string.app_icon_content_description),
                         modifier = Modifier
                             .padding(top = 16.dp)
+                            .clip(MaterialTheme.shapes.medium)
                             .width(140.dp)
                             .height(140.dp)
                     )
