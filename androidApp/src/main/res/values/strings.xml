@@ -15,24 +15,33 @@
     <string name="date_format">Date format</string>
 
     <string name="other">Other</string>
-    <string name="write_developer">Write to developer</string>
+    <string name="report_error">Report error</string>
     <string name="rate_app">Rate app</string>
     <string name="about_app">About app</string>
     <string name="more_apps">More applications</string>
     <string name="version">Version</string>
     <string name="rate">Rate</string>
     <string name="rate_thanks">Thanks for your rating</string>
+    <string name="developer_email">md101110group@gmail.com</string>
 
     <!--About app-->
     <string name="about_app_description">AdStat is the best app to track your Google AdMob earnings!\n\nThe application is intended for developers or advertisers.\nThis is a safe and secure way to view your AdSense and AdMob earnings. It uses Google\'s secure login and does not save your password or any personal information.\nYou can perform simple data analysis and view it in simple reports and charts.</string>
     <string name="legal_information">Legal information</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_policy_url">"https://sites.google.com/view/ad-stat/privacy-policy"</string>
+    <string name="licenses">Licenses</string>
+    <string name="open_on_github">Open on GitHub</string>
+    <string name="github_url">"https://github.com/mobile-development-group/NASAWallpaper"</string>
     <string name="share_app">Share app</string>
     <string name="share_app_description">I recommend you a mobile application for viewing AdMob statistics</string>
 
     <!--More apps-->
     <string name="open_in_store">Open in GooglePlay</string>
+
+    <!--Error-->
+    <string name="error_title">Error</string>
+    <string name="error_description">Something went wrong while loading data =(</string>
+    <string name="try_again">Try again</string>
 
     <!--DatePicker-->
     <string name="cancel">Cancel</string>
