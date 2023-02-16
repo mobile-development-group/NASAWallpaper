@@ -14,7 +14,8 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
         networkModule,
 
         // Data/Domain modules
-        nasaModule
+        wallpaperModule,
+        licenseModule
     )
 }
 

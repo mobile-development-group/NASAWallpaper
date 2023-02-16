@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.mdgroup.nasawallpapers.presentation.BottomSheetController
 import com.mdgroup.nasawallpapers.presentation.navigation.Router
+import com.mdgroup.nasawallpapers.presentation.screens.more.MoreAppsScreen
 
 @ExperimentalMaterialApi
 @Composable
@@ -15,8 +16,16 @@ fun SettingsGraph(navController: NavHostController, bottomSheetController: Botto
         composable(route = Router.SETTINGS) {
             SettingsScreen(navController, bottomSheetController)
         }
+
         composable(route = Router.ABOUT_APP) {
             AboutScreen(navController)
+        }
+        composable(route = Router.LICENSES) {
+            LicensesScreen(navController)
+        }
+
+        composable(route = Router.MORE_APPS) {
+            MoreAppsScreen(navController)
         }
     }
 }

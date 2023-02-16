@@ -41,8 +41,9 @@ fun SettingsScreen(navController: NavHostController, bottomSheetController: Bott
             }
 
             item {
+                val developerEmail = stringResource(id = R.string.developer_email)
                 OtherSector(
-                    onClickWriteToDeveloper = { IntentUtils.sendEmailToDeveloper(context, "test@gmail.com") },
+                    onClickWriteToDeveloper = { IntentUtils.sendEmailToDeveloper(context, developerEmail) },
                     onClickRateApp = {
                         bottomSheetController.setView {
                             val rateThanksText = stringResource(id = R.string.rate_thanks)
@@ -56,7 +57,8 @@ fun SettingsScreen(navController: NavHostController, bottomSheetController: Bott
                             }
                         }
                     },
-                    onClickAboutApp = { navController.navigate(Router.ABOUT_APP) }
+                    onClickAboutApp = { navController.navigate(Router.ABOUT_APP) },
+                    onClickMoreApps = { navController.navigate(Router.MORE_APPS) }
                 )
             }
         }

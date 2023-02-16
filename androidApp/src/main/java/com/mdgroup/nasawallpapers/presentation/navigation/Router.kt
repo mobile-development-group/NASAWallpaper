@@ -11,4 +11,6 @@ object Router {
 
     const val SETTINGS = "settings"
     const val ABOUT_APP = "about_app"
+    const val MORE_APPS = "more_apps"
+    const val LICENSES = "licenses"
 }
