@@ -13,19 +13,22 @@ import com.mdgroup.nasawallpapers.core.utils.IntentUtils
 import com.mdgroup.nasawallpapers.domain.interactors.WallpaperInteractor
 import com.mdgroup.nasawallpapers.domain.models.DateModel
 import com.mdgroup.nasawallpapers.domain.models.WallpaperModel
+import java.time.LocalDate
 import java.util.*
 
 class WallpaperViewModel(private val date: String?, private val resources: Resources, private val interactor: WallpaperInteractor) : BaseViewModel() {
 
     data class State(
         val isLoading: Boolean = true,
-        val wallpaper: WallpaperModel?
+        val wallpaper: WallpaperModel?,
+        val date: LocalDate
     )
 
     var state: State by mutableStateOf(
         State(
             isLoading = true,
-            wallpaper = null
+            wallpaper = null,
+            date = LocalDate.now()
         )
     )
 
@@ -82,6 +85,26 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
         }
     }
 
+    fun random() {
+        val calendar = Calendar.getInstance()
+
+        val year = Random().nextInt(calendar.get(Calendar.YEAR) - 1995) + 1995
+
+        val month = if (calendar.get(Calendar.YEAR) == year) {
+            Random().nextInt(calendar.get(Calendar.MONTH) + 1) + 1
+        } else {
+            Random().nextInt(12) + 1
+        }
+
+        val day = if (calendar.get(Calendar.YEAR) == year && calendar.get(Calendar.MONTH) == month) {
+            Random().nextInt(calendar.get(Calendar.DAY_OF_MONTH)) + 1
+        } else {
+            Random().nextInt(28) + 1
+        }
+
+        fetchWallpaper(DateModel(year, month, day))
+    }
+
     fun setAsWallpaper(context: Context, wallpaperManager: WallpaperManager) {
         onBackgroundScope {
             showLoading()
@@ -99,6 +122,25 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
         }
     }
 
+    fun fetchWallpaper(date: LocalDate) {
+        fetchWallpaper(DateModel(date.year, date.monthValue, date.dayOfMonth))
+    }
+
+    private fun fetchWallpaper(date: DateModel) {
+        onBackgroundScope {
+            val response = interactor.fetch(date)
+            if (response.isSuccess) {
+                response.data?.let {
+                    onUiScope {
+                        state = State(isLoading = false, wallpaper = it, date = makeLocalDateFromString(it.date))
+                    }
+                }
+            } else {
+                hideLoading()
+            }
+        }
+    }
+
     private fun setupWallpaper(context: Context, wallpaperManager: WallpaperManager, uri: Uri) {
         try {
             val bitmap = FileUtils.bitmapFromUri(context, uri)
@@ -108,22 +150,12 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
         }
     }
 
-    private fun fetchWallpaper(date: DateModel) {
-        onBackgroundScope {
-            val response = interactor.fetch(date)
-            if (response.isSuccess) {
-                response.data?.let {
-                    onUiScope {
-                        state = State(isLoading = false, wallpaper = it)
-                    }
-                }
-            } else {
-                hideLoading()
-            }
-        }
+    private fun makeDateModel(calendar: Calendar): DateModel {
+        return DateModel(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
     }
 
-    private fun makeDateModel(calendar: Calendar): DateModel {
-        return DateModel(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+    private fun makeLocalDateFromString(date: String): LocalDate {
+        val data = date.split("-")
+        return LocalDate.of(data[0].toInt(), data[1].toInt() + 1, data[2].toInt())
     }
 }

@@ -7,14 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,6 +19,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.mdgroup.nasawallpapers.presentation.navigation.GraphFactory
 import com.mdgroup.nasawallpapers.presentation.navigation.NavigationItem
 import com.mdgroup.nasawallpapers.presentation.screens.bookmarks.BookmarksGraph
+import com.mdgroup.nasawallpapers.presentation.screens.calendar.CalendarScreen
+import com.mdgroup.nasawallpapers.presentation.screens.settings.SettingsGraph
 import com.mdgroup.nasawallpapers.presentation.screens.wallpapers.WallpapersGraph
 
 @ExperimentalMaterialApi
@@ -31,20 +30,54 @@ class MainActivity : ComponentActivity() {
         NavigationItem.Wallpapers.route
     )
 
+    /**
+     * Content for BottomSheet
+     */
+    private val content: (@Composable BoxScope.() -> Unit) = {}
+    private var bottomSheetContent by mutableStateOf(content)
+    lateinit var bottomSheetController: BottomSheetController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ApplicationTheme {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    MainScreen()
-                }
+                ModalBottomSheet()
             }
+        }
+    }
+
+    /**
+     * For showing BottomSheet
+     */
+    @Composable
+    fun ModalBottomSheet() {
+        val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+
+        bottomSheetController =
+            BottomSheetController(rememberCoroutineScope(), { bottomSheetContent = it }, sheetState)
+
+        ModalBottomSheetLayout(
+            sheetContent = {
+                Box(
+                    modifier = Modifier
+                        .background(MaterialTheme.colors.primary)
+                        .defaultMinSize(minHeight = 1.dp)
+                        .padding(bottom = 60.dp, top = 16.dp),
+                    content = bottomSheetContent
+                )
+            },
+            sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+            sheetState = sheetState,
+            sheetBackgroundColor = MaterialTheme.colors.background,
+        ) {
+            // Main screen
+            MainScreen(bottomSheetController)
         }
     }
 
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     @Composable
-    fun MainScreen() {
+    fun MainScreen(bottomSheetController: BottomSheetController) {
         Scaffold(
             bottomBar = {
                 BottomNavigationBar(currentTab) { route ->
@@ -52,17 +85,17 @@ class MainActivity : ComponentActivity() {
                 }
             }
         ) {
-            Navigation(route = currentTab)
+            Navigation(route = currentTab, bottomSheetController)
         }
     }
 
     @Composable
-    private fun Navigation(route: String) {
+    private fun Navigation(route: String, bottomSheetController: BottomSheetController) {
         val settingsNavState = rememberSaveable { mutableStateOf(Bundle()) }
 
-        // Надстройка статуса для соответствия iOS
-        if (!isSystemInDarkTheme())
-            window.statusBarColor = MaterialTheme.colors.primary.toArgb()
+        // Config for correspondence with iOS
+        //        if (!isSystemInDarkTheme())
+        //            window.statusBarColor = MaterialTheme.colors.primary.toArgb()
 
         when (route) {
             NavigationItem.Wallpapers.route -> {
@@ -70,22 +103,22 @@ class MainActivity : ComponentActivity() {
                     WallpapersGraph(navController)
                 }
             }
+            NavigationItem.Calendar.route -> {
+                CalendarScreen()
+            }
             NavigationItem.Bookmarks.route -> {
                 GraphFactory(navState = settingsNavState) { navController ->
                     BookmarksGraph(navController)
                 }
-            }
-            NavigationItem.Calendar.route -> {
-
             }
             NavigationItem.Settings.route -> {
                 //                // Надстройка статуса для соответствия iOS
                 //                if (!isSystemInDarkTheme())
                 //                    window.statusBarColor = MaterialTheme.colors.background.toArgb()
                 //
-                //                GraphFactory(navState = settingsNavState) { navController ->
-                //                    SettingsGraph(navController, bottomSheetController)
-                //                }
+                GraphFactory(navState = settingsNavState) { navController ->
+                    SettingsGraph(navController, bottomSheetController)
+                }
             }
         }
     }
@@ -94,6 +127,7 @@ class MainActivity : ComponentActivity() {
     fun BottomNavigationBar(route: String, onClick: (String) -> Unit) {
         val items = listOf(
             NavigationItem.Wallpapers,
+            NavigationItem.Calendar,
             NavigationItem.Bookmarks,
             NavigationItem.Settings
         )

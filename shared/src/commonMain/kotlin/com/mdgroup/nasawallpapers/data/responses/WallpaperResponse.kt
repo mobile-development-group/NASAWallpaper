@@ -13,7 +13,7 @@ data class WallpaperResponse(
     @SerialName("explanation")
     val explanation: String?,
     @SerialName("hdurl")
-    val hdurl: String?,
+    val hdurl: String? = null,
     @SerialName("media_type")
     val mediaType: String?,
     @SerialName("service_version")

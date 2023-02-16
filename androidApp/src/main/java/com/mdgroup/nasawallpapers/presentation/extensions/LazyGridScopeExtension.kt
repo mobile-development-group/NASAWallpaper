@@ -1,4 +1,4 @@
-package com.mdgroup.nasawallpapers.presentation.utils
+package com.mdgroup.nasawallpapers.presentation.extensions
 
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope

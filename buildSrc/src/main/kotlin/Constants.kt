@@ -12,7 +12,7 @@ object Version {
 
         const val NAVIGATION_VERSION = "2.4.1"
         const val LIFECYCLE_VERSION = "2.2.0"
-        const val COMPOSE_VERSION = "1.1.1"
+        const val COMPOSE_UI_VERSION = "1.3.3"
         const val SLF4J_VERSION = "1.6.1"
         const val MP_ANDROID_CHART_VERSION = "v3.1.0"
         const val COIL_VERSION = "2.1.0"

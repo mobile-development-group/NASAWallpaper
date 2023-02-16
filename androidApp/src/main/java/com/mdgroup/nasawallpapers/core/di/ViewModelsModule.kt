@@ -10,9 +10,9 @@ import org.koin.dsl.module
 
 val viewModelsModule = module {
 
-    viewModel { WallpapersViewModel(get<WallpaperInteractor>()) }
+    viewModel { WallpapersViewModel(interactor = get<WallpaperInteractor>()) }
 
-    viewModel { (date: String?) -> WallpaperViewModel(date, get<Resources>(), get<WallpaperInteractor>()) }
+    viewModel { (date: String?) -> WallpaperViewModel(date = date, resources = get<Resources>(), interactor = get<WallpaperInteractor>()) }
 
-    viewModel { BookmarksViewModel(get<WallpaperInteractor>()) }
+    viewModel { BookmarksViewModel(interactor = get<WallpaperInteractor>()) }
 }

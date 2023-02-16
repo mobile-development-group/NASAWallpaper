@@ -1,4 +1,5 @@
 import Version.Android.COIL_VERSION
+import Version.Android.COMPOSE_UI_VERSION
 import Version.Android.LIFECYCLE_VERSION
 import Version.Android.NAVIGATION_VERSION
 import Version.COROUTINES_VERSION
@@ -14,7 +15,7 @@ android {
     compileSdk = 33
     defaultConfig {
         applicationId = "com.mdgroup.nasawallpapers"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -53,14 +54,18 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$LIFECYCLE_VERSION")
 
     // Compose
-    implementation("androidx.compose.ui:ui:1.3.3")
-    implementation("androidx.compose.ui:ui-tooling:1.3.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
+    implementation("androidx.compose.ui:ui:$COMPOSE_UI_VERSION")
+    implementation("androidx.compose.ui:ui-tooling:$COMPOSE_UI_VERSION")
+    implementation("androidx.compose.ui:ui-tooling-preview:$COMPOSE_UI_VERSION")
     implementation("androidx.compose.foundation:foundation:1.3.1")
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.paging:paging-compose:1.0.0-alpha18")
     implementation("com.google.accompanist:accompanist-permissions:0.29.1-alpha")
+
+    // Calendar
+    // https://github.com/mobile-development-group/ComposeCalendar
+    implementation("io.github.mobile-development-group:composecalendar:2.1.2")
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:$NAVIGATION_VERSION")

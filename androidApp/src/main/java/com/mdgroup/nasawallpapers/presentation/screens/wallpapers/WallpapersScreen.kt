@@ -14,7 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.mdgroup.nasawallpapers.presentation.navigation.Router
-import com.mdgroup.nasawallpapers.presentation.utils.items
+import com.mdgroup.nasawallpapers.presentation.extensions.items
 import com.mdgroup.nasawallpapers.presentation.viewmodels.WallpapersViewModel
 import org.koin.androidx.compose.viewModel
 
