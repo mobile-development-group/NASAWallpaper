@@ -70,7 +70,7 @@ fun HeaderView(
 /** Previews */
 @Preview(name = "Light mode", showBackground = true)
 @Composable
-private fun HeaderViewLightPreview() {
+private fun LightPreview() {
     ApplicationTheme {
         HeaderView(
             label = "Dashboard",
@@ -103,7 +103,7 @@ private fun HeaderViewLightPreview() {
 
 @Preview(name = "Dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun HeaderViewDarkPreview() {
+private fun DarkPreview() {
     ApplicationTheme {
         HeaderView(
             label = "Dashboard",

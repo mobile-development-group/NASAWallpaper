@@ -72,12 +72,12 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
     fun share(context: Context) {
         state.wallpaper?.let { wallpaper ->
             wallpaper.uri?.let {
-                IntentUtils.sendPhotos(context, Uri.parse(it))
+                IntentUtils.sendPhoto(context, Uri.parse(it))
             } ?: run {
                 showLoading()
                 onBackgroundScope {
                     FileUtils.saveFileUsingMediaStore(context, wallpaper.hdurl, wallpaper.title)?.let { uri ->
-                        IntentUtils.sendPhotos(context, uri)
+                        IntentUtils.sendPhoto(context, uri)
                     }
                     hideLoading()
                 }

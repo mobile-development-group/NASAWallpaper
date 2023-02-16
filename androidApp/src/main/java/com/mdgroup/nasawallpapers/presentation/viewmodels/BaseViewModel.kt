@@ -17,10 +17,6 @@ abstract class BaseViewModel : ViewModel() {
 
     private val scope: CoroutineScope by lazy { CoroutineScope(parentJob + coroutineExceptionHandler) }
 
-    /**
-     * Делает запрос на Dispatchers.Default, для того что б  переключится на другой Dispatcher нужно в блоке вызвать
-     * withContext(Dispatchers.Main){}
-     */
     fun onBackgroundScope(
         start: CoroutineStart = CoroutineStart.DEFAULT,
         block: suspend CoroutineScope.() -> Unit

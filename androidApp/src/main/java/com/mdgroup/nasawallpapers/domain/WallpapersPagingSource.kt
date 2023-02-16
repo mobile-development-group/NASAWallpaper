@@ -2,11 +2,13 @@ package com.mdgroup.nasawallpapers.domain
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.mdgroup.nasawallpapers.core.platform.Logger
 import com.mdgroup.nasawallpapers.domain.interactors.WallpaperInteractor
 import com.mdgroup.nasawallpapers.domain.models.DateModel
 import com.mdgroup.nasawallpapers.domain.models.WallpaperModel
-import java.time.ZoneId
 import java.util.*
+
+private const val TAG = "WallpapersPagingSource"
 
 class WallpapersPagingSource(private val interactor: WallpaperInteractor) : PagingSource<Int, WallpaperModel>() {
 
@@ -37,8 +39,10 @@ class WallpapersPagingSource(private val interactor: WallpaperInteractor) : Pagi
                 }
             }
 
+            Logger.tag(TAG).e(response.ex)
             LoadResult.Error(Throwable(response.ex))
         } catch (e: Exception) {
+            Logger.tag(TAG).e(e)
             LoadResult.Error(e)
         }
     }

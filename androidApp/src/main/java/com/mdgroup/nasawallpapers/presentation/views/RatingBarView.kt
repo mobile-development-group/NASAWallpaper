@@ -33,7 +33,7 @@ fun RatingBarView(modifier: Modifier = Modifier, ratingChange: (Float) -> Unit =
 @ExperimentalMaterialApi
 @Preview(name = "Light mode", showBackground = true)
 @Composable
-private fun RatingBarLightPreview() {
+private fun LightPreview() {
     ApplicationTheme {
         RatingBarView()
     }
@@ -42,7 +42,7 @@ private fun RatingBarLightPreview() {
 @ExperimentalMaterialApi
 @Preview(name = "Dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun RatingBarDarkPreview() {
+private fun DarkPreview() {
     ApplicationTheme {
         RatingBarView()
     }

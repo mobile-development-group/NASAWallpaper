@@ -56,7 +56,7 @@ fun WallpaperScreen(navController: NavHostController, date: String?) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.back_content_description),
-                    modifier = Modifier.size(32.dp),
+                    modifier = Modifier.size(24.dp),
                     tint = MaterialTheme.colors.primaryVariant
                 )
             }

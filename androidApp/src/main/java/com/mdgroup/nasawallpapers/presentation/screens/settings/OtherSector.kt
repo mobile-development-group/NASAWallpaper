@@ -25,7 +25,8 @@ import com.mdgroup.nasawallpapers.presentation.ApplicationTheme
 fun OtherSector(
     onClickWriteToDeveloper: () -> Unit = {},
     onClickRateApp: () -> Unit = {},
-    onClickAboutApp: () -> Unit = {}
+    onClickAboutApp: () -> Unit = {},
+    onClickMoreApps: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier.padding(top = 16.dp)
@@ -49,7 +50,7 @@ fun OtherSector(
         ) {
             Column {
                 ClickableText(
-                    text = AnnotatedString(stringResource(id = R.string.write_developer)),
+                    text = AnnotatedString(stringResource(id = R.string.report_error)),
                     style = TextStyle(
                         color = MaterialTheme.colors.onPrimary,
                         fontSize = 16.sp
@@ -94,6 +95,24 @@ fun OtherSector(
                         .fillMaxWidth()
                         .padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 12.dp),
                     onClick = { onClickAboutApp() }
+                )
+                Divider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp),
+                    color = MaterialTheme.colors.onSecondary,
+                    thickness = 0.5.dp
+                )
+                ClickableText(
+                    text = AnnotatedString(stringResource(id = R.string.more_apps)),
+                    style = TextStyle(
+                        color = MaterialTheme.colors.onPrimary,
+                        fontSize = 16.sp
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 12.dp),
+                    onClick = { onClickMoreApps() }
                 )
             }
         }

@@ -1,7 +1,13 @@
 package com.mdgroup.nasawallpapers.presentation.screens.wallpapers
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.CircularProgressIndicator
@@ -13,9 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.mdgroup.nasawallpapers.presentation.navigation.Router
 import com.mdgroup.nasawallpapers.presentation.extensions.items
+import com.mdgroup.nasawallpapers.presentation.navigation.Router
 import com.mdgroup.nasawallpapers.presentation.viewmodels.WallpapersViewModel
+import com.mdgroup.nasawallpapers.presentation.views.ErrorView
 import org.koin.androidx.compose.viewModel
 
 @Composable
@@ -48,13 +55,13 @@ fun WallpapersScreen(navController: NavHostController) {
             }
         }
 
-        when (val state = wallpapers.loadState.refresh) {
+        when (wallpapers.loadState.refresh) {
             is LoadState.NotLoading -> Unit
             is LoadState.Loading -> {
                 CircularProgressIndicator(color = MaterialTheme.colors.primaryVariant)
             }
             is LoadState.Error -> {
-                //TODO показываем ошибку из state
+                ErrorView(onClickTryAgain = {})
             }
         }
     }

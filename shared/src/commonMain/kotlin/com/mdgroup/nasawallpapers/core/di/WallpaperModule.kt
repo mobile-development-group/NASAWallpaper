@@ -8,7 +8,7 @@ import com.mdgroup.nasawallpapers.domain.repositories.WallpaperRepository
 import com.mdgroup.nasawallpapers.sqldelight.Database
 import org.koin.dsl.module
 
-val nasaModule = module {
+val wallpaperModule = module {
 
     single<WallpaperRepository> { WallpaperRepositoryImpl(get<ApiInterface>(), get<Database>()) }
 
