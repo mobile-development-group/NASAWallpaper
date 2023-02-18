@@ -11,9 +11,20 @@ import SwiftUI
 struct WallpaperDetailsView: View {
     
     let item: WallpaperIdentifiable
-    let onClickSave: () -> ()
-    let onClickShare: () -> ()
-    let onClickAsWallpaper: () -> ()
+    let onClickBookmark: () -> ()
+    
+    @State
+    private var isShowShareSheet = false
+    
+    @StateObject
+    var sharedManager: SharedImageManager
+    
+    init(item: WallpaperIdentifiable, onClickBookmark: @escaping () -> ()) {
+        self.item = item
+        self.onClickBookmark = onClickBookmark
+        
+        self._sharedManager = StateObject(wrappedValue: SharedImageManager(data: item))
+    }
     
     var body: some View {
         ScrollView {
@@ -46,19 +57,32 @@ struct WallpaperDetailsView: View {
                         .padding(.horizontal, 16)
                     
                     HStack {
-                        Button(action: onClickSave, label: {
+                        Button(action: onClickBookmark, label: {
                             Image(systemName: item.uri == nil ? "bookmark" : "bookmark.fill")
                         })
-                        Button(action: onClickShare, label: {
-                            Image(systemName: "square.and.arrow.up")
-                        })
-                        .padding(.leading, 8)
-                        Button(action: onClickAsWallpaper, label: {
-                            Image(systemName: "arrow.turn.up.forward.iphone.fill")
-                                .frame(width: 24, height: 24)
-                        })
-                        .padding(.leading, 8)
+                        
+                        if #available(iOS 16.0, *) {
+                            if let image = sharedManager.image {
+                                ShareLink(item: image, preview: SharePreview(item.title, image: image)) {
+                                    Image(systemName: "square.and.arrow.up")
+                                }
+                                .padding(.leading, 8)
+                            }
+                        } else {
+                            if item.uri != nil {
+                                Button(action: { isShowShareSheet.toggle() }, label: {
+                                    Image(systemName: "square.and.arrow.up")
+                                })
+                                .padding(.leading, 8)
+                            }
+                        }
                     }
+                    .sheet(isPresented: self.$isShowShareSheet) {
+                        if let path = self.item.uri, let image = UIImage(contentsOfFile: path) {
+                            ShareSheet(text: item.title, image: image)
+                        }
+                    }
+                    .font(.title)
                     .padding(.top, 8)
                     .padding(.horizontal, 16)
                     
@@ -94,9 +118,7 @@ While scanning the skies for near earth objects Hungarian astronomer Krisztin Sr
                 title: "2023 CX1 Meteor Flash",
                 url: "https://apod.nasa.gov/apod/image/2302/gijsDSC_1917(2x3)800px.jpg"
             ),
-            onClickSave: {},
-            onClickShare: {},
-            onClickAsWallpaper: {}
+            onClickBookmark: {}
         )
     }
 }

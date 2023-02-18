@@ -21,6 +21,9 @@
 		CA30720E29A0434B0036DA74 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30720D29A0434B0036DA74 /* Tab.swift */; };
 		CA30721329A1281D0036DA74 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721229A1281D0036DA74 /* Logger.swift */; };
 		CA30721629A1289F0036DA74 /* WallpaperMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721529A1289F0036DA74 /* WallpaperMapper.swift */; };
+		CA30721D29A13CCB0036DA74 /* SharedImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721C29A13CCB0036DA74 /* SharedImageManager.swift */; };
+		CA30722029A145BF0036DA74 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721F29A145BF0036DA74 /* ShareSheet.swift */; };
+		CA30722229A145E90036DA74 /* ShareActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30722129A145E90036DA74 /* ShareActivityItemSource.swift */; };
 		CA7B7650299FC361006B3113 /* WallpapersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B764F299FC361006B3113 /* WallpapersScreen.swift */; };
 		CA7B7656299FC415006B3113 /* WallpaperItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B7655299FC415006B3113 /* WallpaperItem.swift */; };
 		CA7B7658299FC4A9006B3113 /* WallpaperDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B7657299FC4A9006B3113 /* WallpaperDetailsView.swift */; };
@@ -62,6 +65,9 @@
 		CA30720D29A0434B0036DA74 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		CA30721229A1281D0036DA74 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CA30721529A1289F0036DA74 /* WallpaperMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperMapper.swift; sourceTree = "<group>"; };
+		CA30721C29A13CCB0036DA74 /* SharedImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedImageManager.swift; sourceTree = "<group>"; };
+		CA30721F29A145BF0036DA74 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		CA30722129A145E90036DA74 /* ShareActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareActivityItemSource.swift; sourceTree = "<group>"; };
 		CA7B764F299FC361006B3113 /* WallpapersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpapersScreen.swift; sourceTree = "<group>"; };
 		CA7B7655299FC415006B3113 /* WallpaperItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperItem.swift; sourceTree = "<group>"; };
 		CA7B7657299FC4A9006B3113 /* WallpaperDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperDetailsView.swift; sourceTree = "<group>"; };
@@ -156,6 +162,23 @@
 			path = domain;
 			sourceTree = "<group>";
 		};
+		CA30721E29A145B60036DA74 /* sheets */ = {
+			isa = PBXGroup;
+			children = (
+				CA30721F29A145BF0036DA74 /* ShareSheet.swift */,
+				CA30722129A145E90036DA74 /* ShareActivityItemSource.swift */,
+			);
+			path = sheets;
+			sourceTree = "<group>";
+		};
+		CA30722329A14C450036DA74 /* managers */ = {
+			isa = PBXGroup;
+			children = (
+				CA30721C29A13CCB0036DA74 /* SharedImageManager.swift */,
+			);
+			path = managers;
+			sourceTree = "<group>";
+		};
 		CA7B7648299FC17D006B3113 /* core */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +192,8 @@
 		CA7B7649299FC19C006B3113 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				CA30722329A14C450036DA74 /* managers */,
+				CA30721E29A145B60036DA74 /* sheets */,
 				CA30720C29A0433D0036DA74 /* navigation */,
 				CA7B765F299FC72B006B3113 /* identifiables */,
 				CA7B764C299FC1D1006B3113 /* views */,
@@ -213,8 +238,8 @@
 			children = (
 				CA7B764F299FC361006B3113 /* WallpapersScreen.swift */,
 				CA7B7655299FC415006B3113 /* WallpaperItem.swift */,
-				CA7B7657299FC4A9006B3113 /* WallpaperDetailsView.swift */,
 				CA7B7659299FC4B9006B3113 /* WallpaperScreen.swift */,
+				CA7B7657299FC4A9006B3113 /* WallpaperDetailsView.swift */,
 			);
 			path = wallpapers;
 			sourceTree = "<group>";
@@ -367,6 +392,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA30722229A145E90036DA74 /* ShareActivityItemSource.swift in Sources */,
+				CA30721D29A13CCB0036DA74 /* SharedImageManager.swift in Sources */,
 				CA7B765A299FC4B9006B3113 /* WallpaperScreen.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				CA307200299FF40A0036DA74 /* BookmarksScreen.swift in Sources */,
@@ -386,6 +413,7 @@
 				CA30721329A1281D0036DA74 /* Logger.swift in Sources */,
 				CA30720B29A011930036DA74 /* NotificationCenterNames.swift in Sources */,
 				CA7B766D299FDCBF006B3113 /* ColorExtension.swift in Sources */,
+				CA30722029A145BF0036DA74 /* ShareSheet.swift in Sources */,
 				CA307204299FF5270036DA74 /* SettingsScreen.swift in Sources */,
 				CA7B7658299FC4A9006B3113 /* WallpaperDetailsView.swift in Sources */,
 			);

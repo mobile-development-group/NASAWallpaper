@@ -34,9 +34,9 @@ struct BookmarksScreen: View {
                     }
                 }
             }
+            .navigationBarHidden(true)
             .padding(.horizontal)
         }
-        .navigationBarHidden(true)
         .onReceive(bookmarkNotification) { _ in
             viewModel.fetch()
         }

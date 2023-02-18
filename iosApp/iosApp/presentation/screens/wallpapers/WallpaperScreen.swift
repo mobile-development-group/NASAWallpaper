@@ -21,15 +21,7 @@ struct WallpaperScreen: View {
         if let wallpaper = viewModel.wallpaper {
             WallpaperDetailsView(
                 item: wallpaper,
-                onClickSave: {
-                    viewModel.save()
-                },
-                onClickShare: {
-                    viewModel.share()
-                },
-                onClickAsWallpaper: {
-                    
-                }
+                onClickBookmark: { viewModel.toBookmark() }
             )
             .ignoresSafeArea()
         } else {

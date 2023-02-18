@@ -29,10 +29,8 @@ class WallpaperViewModel : BaseViewModel {
     }
     
     func fetch() {
-        let date = data.date.components(separatedBy: "-")
-        
         // Check cache
-        interactor.fetch(date: DateModel(year: Int32(date[0])!, month: Int32(date[1])!, day: Int32(date[2])!)) { result, error in
+        interactor.fetch(date: dateToDateModel(string: self.data.date)) { result, error in
             if let result = result as? Result, let model = result.data {
                 do {
                     self.wallpaper = try WallpaperIdentifiable.fromModel(model: model)
@@ -46,54 +44,60 @@ class WallpaperViewModel : BaseViewModel {
         }
     }
     
-    func save() {
+    func toBookmark() {
         guard let wallpaper = self.wallpaper else { return }
         
-        download(url: wallpaper.hdurl) { error, uri in
+        if wallpaper.uri == nil {
             
-            guard let uri = uri else {
-                Logger.e(error)
-                return
+            download(url: wallpaper.hdurl) { error, uri in
+                
+                guard let uri = uri else {
+                    Logger.e(error)
+                    return
+                }
+                
+                let model = WallpaperModel(
+                    copyright: wallpaper.copyright,
+                    date: wallpaper.date,
+                    explanation: wallpaper.explanation,
+                    hdurl: wallpaper.hdurl,
+                    mediaType: wallpaper.mediaType,
+                    serviceVersion: wallpaper.serviceVersion,
+                    title: wallpaper.title,
+                    url: wallpaper.url,
+                    uri: uri.lastPathComponent
+                )
+                
+                self.interactor.save(model: model)
+                
+                // Update UI
+                DispatchQueue.main.async {
+                    self.wallpaper = try? WallpaperIdentifiable.fromModel(model: model)
+                    NotificationCenter.default.post(name: .BookmarkNotification, object: nil)
+                }
             }
             
-            let model = WallpaperModel(
-                copyright: wallpaper.copyright,
-                date: wallpaper.date,
-                explanation: wallpaper.explanation,
-                hdurl: wallpaper.hdurl,
-                mediaType: wallpaper.mediaType,
-                serviceVersion: wallpaper.serviceVersion,
-                title: wallpaper.title,
-                url: wallpaper.url,
-                uri: uri.lastPathComponent
-            )
+        } else {
+            if let path = wallpaper.uri {
+                try? FileManager.default.removeItem(atPath: path)
+            }
             
-            self.interactor.save(model: model)
+            self.interactor.delete(date: dateToDateModel(string: wallpaper.date))
             
+            // Update UI
+            self.wallpaper?.uri = nil
             DispatchQueue.main.async {
-                // Update UI
-                self.wallpaper = try? WallpaperIdentifiable.fromModel(model: model)
                 NotificationCenter.default.post(name: .BookmarkNotification, object: nil)
             }
         }
     }
     
-    func share() {
-        guard let wallpaper = self.wallpaper else { return }
-        
-        download(url: wallpaper.hdurl) { error, uri in
-            
-            guard let uri = uri else {
-                Logger.e(error)
-                return
-            }
-            
-            
-            
-        }
+    private func dateToDateModel(string: String) -> DateModel {
+        let date = data.date.components(separatedBy: "-")
+        return DateModel(year: Int32(date[0])!, month: Int32(date[1])!, day: Int32(date[2])!)
     }
     
-    func download(url: String, completion: @escaping (Error?, URL?) -> Void) {
+    private func download(url: String, completion: @escaping (Error?, URL?) -> Void) {
         guard let url = URL(string: url) else { return }
         
         let task = URLSession.shared.downloadTask(with: url) { (tempLocalUrl, response, error) in

@@ -36,8 +36,8 @@ struct WallpapersScreen: View {
                 }
             }
             .padding(.horizontal)
+            .navigationBarHidden(true)
         }
-        .navigationBarHidden(true)
         
         if viewModel.isLoading {
             ProgressView()
