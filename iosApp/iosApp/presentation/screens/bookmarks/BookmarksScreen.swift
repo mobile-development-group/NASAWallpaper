@@ -10,11 +10,11 @@ import SwiftUI
 
 struct BookmarksScreen: View {
     
-    @StateObject
-    var viewModel = getBookmarksViewModel()
-    
     @Binding
     var tabSelection: Tab
+    
+    @StateObject
+    var viewModel = getBookmarksViewModel()
     
     let bookmarkNotification = NotificationCenter.default.publisher(for: .BookmarkNotification)
     

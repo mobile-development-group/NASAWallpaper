@@ -23,24 +23,26 @@ struct WallpapersScreen: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(viewModel.wallpapers.indices, id: \.self) { index in
-                        NavigationLink(destination: WallpaperScreen(item: viewModel.wallpapers[index])) {
-                            WallpaperItem(item: viewModel.wallpapers[index])
+            ZStack {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(viewModel.wallpapers.indices, id: \.self) { index in
+                            NavigationLink(destination: WallpaperScreen(item: viewModel.wallpapers[index])) {
+                                WallpaperItem(item: viewModel.wallpapers[index])
+                            }
+                            .onAppear(perform: {
+                                viewModel.refresh(index: index)
+                            })
                         }
-                        .onAppear(perform: {
-                            viewModel.refresh(index: index)
-                        })
                     }
+                }
+                
+                if viewModel.isLoading {
+                    ProgressView()
                 }
             }
             .padding(.horizontal)
             .navigationBarHidden(true)
-        }
-        
-        if viewModel.isLoading {
-            ProgressView()
         }
     }
 }

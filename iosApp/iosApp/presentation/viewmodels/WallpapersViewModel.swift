@@ -11,10 +11,10 @@ import shared
 
 class WallpapersViewModel : BaseViewModel {
     
-    private let PREFETCH_DISTANCE = 4
-    
     @Published
     var wallpapers: [WallpaperIdentifiable] = []
+    
+    private let PREFETCH_DISTANCE = 4
     
     private var interactor: WallpaperInteractor
     

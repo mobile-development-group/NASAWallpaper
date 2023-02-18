@@ -10,26 +10,20 @@ import Foundation
 import shared
 import UIKit
 
-class WallpaperViewModel : BaseViewModel {
-    
-    private var interactor: WallpaperInteractor
+class WallpaperViewModel : BaseWallpaperViewModel {
     
     private var data: WallpaperIdentifiable
     
-    @Published
-    var wallpaper: WallpaperIdentifiable? = nil
-    
     init(interactor: WallpaperInteractor, data: WallpaperIdentifiable) {
-        self.interactor = interactor
         self.data = data
         
-        super.init()
+        super.init(interactor: interactor)
         
         self.fetch()
     }
     
     func fetch() {
-        // Check cache
+        showLoading()
         interactor.fetch(date: dateToDateModel(string: self.data.date)) { result, error in
             if let result = result as? Result, let model = result.data {
                 do {
@@ -41,85 +35,9 @@ class WallpaperViewModel : BaseViewModel {
             } else {
                 self.wallpaper = self.data
             }
+            self.hideLoading()
         }
     }
     
-    func toBookmark() {
-        guard let wallpaper = self.wallpaper else { return }
-        
-        if wallpaper.uri == nil {
-            
-            download(url: wallpaper.hdurl) { error, uri in
-                
-                guard let uri = uri else {
-                    Logger.e(error)
-                    return
-                }
-                
-                let model = WallpaperModel(
-                    copyright: wallpaper.copyright,
-                    date: wallpaper.date,
-                    explanation: wallpaper.explanation,
-                    hdurl: wallpaper.hdurl,
-                    mediaType: wallpaper.mediaType,
-                    serviceVersion: wallpaper.serviceVersion,
-                    title: wallpaper.title,
-                    url: wallpaper.url,
-                    uri: uri.lastPathComponent
-                )
-                
-                self.interactor.save(model: model)
-                
-                // Update UI
-                DispatchQueue.main.async {
-                    self.wallpaper = try? WallpaperIdentifiable.fromModel(model: model)
-                    NotificationCenter.default.post(name: .BookmarkNotification, object: nil)
-                }
-            }
-            
-        } else {
-            if let path = wallpaper.uri {
-                try? FileManager.default.removeItem(atPath: path)
-            }
-            
-            self.interactor.delete(date: dateToDateModel(string: wallpaper.date))
-            
-            // Update UI
-            self.wallpaper?.uri = nil
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .BookmarkNotification, object: nil)
-            }
-        }
-    }
     
-    private func dateToDateModel(string: String) -> DateModel {
-        let date = data.date.components(separatedBy: "-")
-        return DateModel(year: Int32(date[0])!, month: Int32(date[1])!, day: Int32(date[2])!)
-    }
-    
-    private func download(url: String, completion: @escaping (Error?, URL?) -> Void) {
-        guard let url = URL(string: url) else { return }
-        
-        let task = URLSession.shared.downloadTask(with: url) { (tempLocalUrl, response, error) in
-            if let tempLocalUrl = tempLocalUrl, error == nil {
-                if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                    Logger.d("Successfully downloaded image. Status code: \(statusCode)")
-                }
-                do {
-                    let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                    let destinationUrl = documentDirectory.appendingPathComponent(url.lastPathComponent)
-                    try FileManager.default.moveItem(at: tempLocalUrl, to: destinationUrl)
-                    
-                    Logger.d("Image saved to: \(destinationUrl)")
-                    completion(nil, destinationUrl)
-                } catch (let writeError) {
-                    completion(writeError, nil)
-                }
-            } else {
-                completion(error, nil)
-            }
-        }
-        
-        task.resume()
-    }
 }

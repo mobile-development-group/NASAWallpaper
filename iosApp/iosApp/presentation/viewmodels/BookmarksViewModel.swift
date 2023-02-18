@@ -11,7 +11,7 @@ import shared
 
 class BookmarksViewModel : BaseViewModel {
     
-    var interactor: WallpaperInteractor
+    private var interactor: WallpaperInteractor
     
     @Published
     var wallpapers: [WallpaperIdentifiable] = []
@@ -21,10 +21,11 @@ class BookmarksViewModel : BaseViewModel {
         
         super.init()
                 
-        fetch()
+        self.fetch()
     }
     
     func fetch() {
+        showLoading()
         do {
             wallpapers = try interactor.getAll().map({ model in
                 return try WallpaperIdentifiable.fromModel(model: model)

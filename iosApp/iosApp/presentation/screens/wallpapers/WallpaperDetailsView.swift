@@ -16,16 +16,6 @@ struct WallpaperDetailsView: View {
     @State
     private var isShowShareSheet = false
     
-    @StateObject
-    var sharedManager: SharedImageManager
-    
-    init(item: WallpaperIdentifiable, onClickBookmark: @escaping () -> ()) {
-        self.item = item
-        self.onClickBookmark = onClickBookmark
-        
-        self._sharedManager = StateObject(wrappedValue: SharedImageManager(data: item))
-    }
-    
     var body: some View {
         ScrollView {
             VStack {
@@ -62,7 +52,9 @@ struct WallpaperDetailsView: View {
                         })
                         
                         if #available(iOS 16.0, *) {
-                            if let image = sharedManager.image {
+                            if let path = item.uri,
+                               let uiImage = UIImage(contentsOfFile: path),
+                               let image = Image(uiImage: uiImage) {
                                 ShareLink(item: image, preview: SharePreview(item.title, image: image)) {
                                     Image(systemName: "square.and.arrow.up")
                                 }
@@ -100,6 +92,7 @@ struct WallpaperDetailsView: View {
                 }
             }
         }
+        .padding(.bottom, 88)
     }
 }
 

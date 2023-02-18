@@ -13,8 +13,47 @@ struct CalendarScreen: View {
     @Binding
     var tabSelection: Tab
     
+    @StateObject
+    private var viewModel: CalendarViewModel = getCalendarViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        if let wallpaper = viewModel.wallpaper {
+            ZStack(alignment: .topTrailing) {
+                WallpaperDetailsView(
+                    item: wallpaper,
+                    onClickBookmark: { viewModel.toBookmark() }
+                )
+                
+                // For not use NavigationView on this screen
+                HStack {
+                    Button(
+                        action: {
+                            viewModel.random()
+                        },
+                        label: {
+                            Image(systemName: "questionmark")
+                        }
+                    )
+                    Button(
+                        action: {
+                            viewModel.random()
+                        },
+                        label: {
+                            Image(systemName: "calendar")
+                        }
+                    )
+                    .padding(.leading, 8)
+                }
+                .font(.title2)
+                .padding(.top, 54)
+                .padding(.trailing, 16)
+                
+                if viewModel.isLoading {
+                    ProgressView()
+                }
+            }
+            .ignoresSafeArea()
+        }
     }
 }
 

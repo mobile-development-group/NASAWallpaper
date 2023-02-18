@@ -27,6 +27,13 @@ func getWallpaperViewModel(item: WallpaperIdentifiable) -> StateObject<Wallpaper
     return StateObject(wrappedValue: viewModel)
 }
 
+func getCalendarViewModel() -> CalendarViewModel {
+    
+    let interactor = koin.get(protocol: WallpaperInteractor.self) as! WallpaperInteractor
+    
+    return CalendarViewModel(interactor: interactor)
+}
+
 func getBookmarksViewModel() -> BookmarksViewModel {
     
     let interactor = koin.get(protocol: WallpaperInteractor.self) as! WallpaperInteractor
