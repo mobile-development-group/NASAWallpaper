@@ -109,7 +109,7 @@ fun CalendarScreen() {
             maxDate = LocalDate.now(),
             onDone = {
                 if (minDate < it && it < now) {
-                    viewModel.fetchWallpaper(it)
+                    viewModel.fetch(it)
                 }
                 isShowDatePicker.value = false
             },

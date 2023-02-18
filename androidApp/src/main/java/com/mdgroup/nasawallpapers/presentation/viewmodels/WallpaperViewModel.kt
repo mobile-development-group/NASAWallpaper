@@ -43,9 +43,9 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
     init {
         date?.let {
             val data = it.split("-")
-            fetchWallpaper(DateModel(data[0].toInt(), data[1].toInt(), data[2].toInt()))
+            fetch(DateModel(data[0].toInt(), data[1].toInt(), data[2].toInt()))
         } ?: kotlin.run {
-            fetchWallpaper(makeDateModel(Calendar.getInstance()))
+            fetch(makeDateModel(Calendar.getInstance()))
         }
     }
 
@@ -90,19 +90,31 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
 
         val year = Random().nextInt(calendar.get(Calendar.YEAR) - 1995) + 1995
 
-        val month = if (calendar.get(Calendar.YEAR) == year) {
-            Random().nextInt(calendar.get(Calendar.MONTH) + 1) + 1
-        } else {
-            Random().nextInt(12) + 1
+        val month = when (year) {
+            calendar.get(Calendar.YEAR) -> Random().nextInt(calendar.get(Calendar.MONTH) + 1) + 1
+            1995 -> Random().nextInt(6) + 6
+            else -> Random().nextInt(12) + 1
         }
 
-        val day = if (calendar.get(Calendar.YEAR) == year && calendar.get(Calendar.MONTH) == month) {
-            Random().nextInt(calendar.get(Calendar.DAY_OF_MONTH)) + 1
-        } else {
-            Random().nextInt(28) + 1
+        val day = when (year) {
+            calendar.get(Calendar.YEAR) -> {
+                if (calendar.get(Calendar.MONTH) == month) {
+                    Random().nextInt(calendar.get(Calendar.DAY_OF_MONTH)) + 1
+                } else {
+                    Random().nextInt(27) + 1
+                }
+            }
+            1995 -> {
+                if (6 == month) {
+                    Random().nextInt(29 - 16) + 16
+                } else {
+                    Random().nextInt(27) + 1
+                }
+            }
+            else -> Random().nextInt(27) + 1
         }
 
-        fetchWallpaper(DateModel(year, month, day))
+        fetch(DateModel(year, month, day))
     }
 
     fun setAsWallpaper(context: Context, wallpaperManager: WallpaperManager) {
@@ -122,11 +134,11 @@ class WallpaperViewModel(private val date: String?, private val resources: Resou
         }
     }
 
-    fun fetchWallpaper(date: LocalDate) {
-        fetchWallpaper(DateModel(date.year, date.monthValue, date.dayOfMonth))
+    fun fetch(date: LocalDate) {
+        fetch(DateModel(date.year, date.monthValue, date.dayOfMonth))
     }
 
-    private fun fetchWallpaper(date: DateModel) {
+    private fun fetch(date: DateModel) {
         onBackgroundScope {
             val response = interactor.fetch(date)
             if (response.isSuccess) {
