@@ -15,7 +15,6 @@ struct WallpaperItem: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            VStack(alignment: .center) {
                 if let path = item.uri, let image = UIImage(contentsOfFile: path) {
                     Image(uiImage: image)
                         .resizable()
@@ -25,22 +24,23 @@ struct WallpaperItem: View {
                         AsyncImage(
                             url: URL(string: url),
                             content: { image in
-                                image
-                                    .resizable()
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                ZStack(alignment: .topTrailing) {
+                                    image
+                                        .resizable()
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    
+                                    Text(item.date)
+                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 16))
+                                        .padding(.top, 16)
+                                        .padding(.trailing, 16)
+                                }
                             },
                             placeholder: {
                                 ProgressView()
                             })
                     }
                 }
-            }
-            
-            Text(item.date)
-                .foregroundColor(Color.white)
-                .font(.system(size: 16))
-                .padding(.top, 16)
-                .padding(.trailing, 16)
         }
         .background(Color.ui.primary)
         .frame(height: 250)
