@@ -49,7 +49,7 @@ kotlin {
                 implementation("io.insert-koin:koin-core:$KOIN_VERSION")
 
                 // DateTime
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
             }
         }
         val commonTest by getting {

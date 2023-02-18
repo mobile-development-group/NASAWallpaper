@@ -10,24 +10,31 @@ import SwiftUI
 
 struct WallpaperScreen: View {
     
-    let item: WallpaperIdentifiable
-    
     @StateObject
-    var viewModel: WallpaperViewModel = getWallpaperViewModel()
+    var viewModel: WallpaperViewModel
+    
+    init(item: WallpaperIdentifiable) {
+        self._viewModel = getWallpaperViewModel(item: item)
+    }
     
     var body: some View {
-        WallpaperDetailsView(
-            item: item,
-            onClickSave: {
-                viewModel.save(wallpaper: item)
-            },
-            onClickShare: {
-                viewModel.share(wallpaper: item)
-            },
-            onClickAsWallpaper: {
-                
-            }
-        )
+        if let wallpaper = viewModel.wallpaper {
+            WallpaperDetailsView(
+                item: wallpaper,
+                onClickSave: {
+                    viewModel.save()
+                },
+                onClickShare: {
+                    viewModel.share()
+                },
+                onClickAsWallpaper: {
+                    
+                }
+            )
+            .ignoresSafeArea()
+        } else {
+            ProgressView()
+        }
     }
 }
 

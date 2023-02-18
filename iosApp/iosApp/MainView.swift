@@ -12,30 +12,30 @@ import shared
 struct MainView: View {
     
     @State
-    private var selection = 0
+    private var selection: Tab = .wallpapers
     
     var body: some View {
         TabView(selection: $selection) {
             WallpapersScreen(tabSelection: $selection)
+                .tag(Tab.wallpapers)
                 .tabItem{
-                    Label("wallpapers".localized(), systemImage: selection == 0 ? "globe.americas.fill" : "globe.americas")
+                    Label("wallpapers".localized(), systemImage: selection == Tab.wallpapers ? "globe.americas.fill" : "globe.americas")
                 }
-                .tag(0)
             CalendarScreen(tabSelection: $selection)
+                .tag(Tab.calendar)
                 .tabItem{
                     Label("calendar".localized(), systemImage: "calendar")
                 }
-                .tag(1)
             BookmarksScreen(tabSelection: $selection)
+                .tag(Tab.bookmarks)
                 .tabItem{
-                    Label("bookmarks".localized(), systemImage: selection == 2 ? "bookmark.fill" : "bookmark")
+                    Label("bookmarks".localized(), systemImage: selection == Tab.bookmarks ? "bookmark.fill" : "bookmark")
                 }
-                .tag(2)
             SettingsScreen(tabSelection: $selection)
+                .tag(Tab.settings)
                 .tabItem{
                     Label("settings".localized(), systemImage: "gear")
                 }
-                .tag(3)
         }
     }
 }

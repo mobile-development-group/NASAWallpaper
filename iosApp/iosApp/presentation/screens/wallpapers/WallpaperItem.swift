@@ -16,17 +16,23 @@ struct WallpaperItem: View {
     var body: some View {
         ZStack(alignment: .top) {
             VStack(alignment: .center) {
-                if let url = item.uri ?? item.url {
-                    AsyncImage(
-                        url: URL(string: url),
-                        content: { image in
-                            image
-                                .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        },
-                        placeholder: {
-                            ProgressView()
-                        })
+                if let path = item.uri, let image = UIImage(contentsOfFile: path) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                } else {
+                    if let url = item.url {
+                        AsyncImage(
+                            url: URL(string: url),
+                            content: { image in
+                                image
+                                    .resizable()
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                            },
+                            placeholder: {
+                                ProgressView()
+                            })
+                    }
                 }
             }
             

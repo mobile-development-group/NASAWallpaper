@@ -25,18 +25,13 @@ class BookmarksViewModel : BaseViewModel {
     }
     
     func fetch() {
-        wallpapers = interactor.getAll().map({ model in
-            WallpaperIdentifiable(
-                copyright: model.copyright,
-                date: model.date,
-                explanation: model.explanation,
-                hdurl: model.hdurl,
-                mediaType: model.mediaType,
-                serviceVersion: model.serviceVersion,
-                title: model.title,
-                url: model.url
-            )
-        })
+        do {
+            wallpapers = try interactor.getAll().map({ model in
+                return try WallpaperIdentifiable.fromModel(model: model)
+            })
+        } catch {
+            Logger.e(error)
+        }
         hideLoading()
     }
 }

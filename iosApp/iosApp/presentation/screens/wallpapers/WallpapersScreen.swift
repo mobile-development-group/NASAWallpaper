@@ -14,7 +14,7 @@ struct WallpapersScreen: View {
     var viewModel = getWallpapersViewModel()
     
     @Binding
-    var tabSelection: Int
+    var tabSelection: Tab
     
     let columns = [
         GridItem(.flexible()),
@@ -22,8 +22,6 @@ struct WallpapersScreen: View {
     ]
     
     var body: some View {
-        let refresh: () -> Void = { viewModel.fetch() }
-        
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 16) {
@@ -31,19 +29,17 @@ struct WallpapersScreen: View {
                         NavigationLink(destination: WallpaperScreen(item: viewModel.wallpapers[index])) {
                             WallpaperItem(item: viewModel.wallpapers[index])
                         }
+                        .onAppear(perform: {
+                            viewModel.refresh(index: index)
+                        })
                     }
                 }
-                
-                HStack{
-                    Spacer()
-                    ProgressView()
-                    Spacer()
-                }.onAppear(perform: refresh)
             }
             .padding(.horizontal)
         }
+        .navigationBarHidden(true)
         
-        if (viewModel.isLoading){
+        if viewModel.isLoading {
             ProgressView()
         }
     }
@@ -51,6 +47,6 @@ struct WallpapersScreen: View {
 
 struct WallpapersScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WallpapersScreen(tabSelection: .constant(0))
+        WallpapersScreen(tabSelection: .constant(Tab.wallpapers))
     }
 }

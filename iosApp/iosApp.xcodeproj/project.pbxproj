@@ -18,6 +18,9 @@
 		CA30720729A00A9F0036DA74 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30720629A00A9F0036DA74 /* BookmarksViewModel.swift */; };
 		CA30720929A00BDF0036DA74 /* WallpaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30720829A00BDF0036DA74 /* WallpaperViewModel.swift */; };
 		CA30720B29A011930036DA74 /* NotificationCenterNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30720A29A011930036DA74 /* NotificationCenterNames.swift */; };
+		CA30720E29A0434B0036DA74 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30720D29A0434B0036DA74 /* Tab.swift */; };
+		CA30721329A1281D0036DA74 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721229A1281D0036DA74 /* Logger.swift */; };
+		CA30721629A1289F0036DA74 /* WallpaperMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721529A1289F0036DA74 /* WallpaperMapper.swift */; };
 		CA7B7650299FC361006B3113 /* WallpapersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B764F299FC361006B3113 /* WallpapersScreen.swift */; };
 		CA7B7656299FC415006B3113 /* WallpaperItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B7655299FC415006B3113 /* WallpaperItem.swift */; };
 		CA7B7658299FC4A9006B3113 /* WallpaperDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B7657299FC4A9006B3113 /* WallpaperDetailsView.swift */; };
@@ -56,6 +59,9 @@
 		CA30720629A00A9F0036DA74 /* BookmarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModel.swift; sourceTree = "<group>"; };
 		CA30720829A00BDF0036DA74 /* WallpaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperViewModel.swift; sourceTree = "<group>"; };
 		CA30720A29A011930036DA74 /* NotificationCenterNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterNames.swift; sourceTree = "<group>"; };
+		CA30720D29A0434B0036DA74 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		CA30721229A1281D0036DA74 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		CA30721529A1289F0036DA74 /* WallpaperMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperMapper.swift; sourceTree = "<group>"; };
 		CA7B764F299FC361006B3113 /* WallpapersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpapersScreen.swift; sourceTree = "<group>"; };
 		CA7B7655299FC415006B3113 /* WallpaperItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperItem.swift; sourceTree = "<group>"; };
 		CA7B7657299FC4A9006B3113 /* WallpaperDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperDetailsView.swift; sourceTree = "<group>"; };
@@ -108,6 +114,7 @@
 			children = (
 				CA7B766B299FDCAD006B3113 /* extensions */,
 				CA7B7648299FC17D006B3113 /* core */,
+				CA30721429A128890036DA74 /* domain */,
 				CA7B7649299FC19C006B3113 /* presentation */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* MainView.swift */,
@@ -125,9 +132,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CA30720C29A0433D0036DA74 /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				CA30720D29A0434B0036DA74 /* Tab.swift */,
+			);
+			path = navigation;
+			sourceTree = "<group>";
+		};
+		CA30721029A127E20036DA74 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				CA30721229A1281D0036DA74 /* Logger.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		CA30721429A128890036DA74 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				CA30721529A1289F0036DA74 /* WallpaperMapper.swift */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
 		CA7B7648299FC17D006B3113 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				CA30721029A127E20036DA74 /* utils */,
 				CA7B7668299FC8BB006B3113 /* di */,
 				CA30720A29A011930036DA74 /* NotificationCenterNames.swift */,
 			);
@@ -137,6 +169,7 @@
 		CA7B7649299FC19C006B3113 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				CA30720C29A0433D0036DA74 /* navigation */,
 				CA7B765F299FC72B006B3113 /* identifiables */,
 				CA7B764C299FC1D1006B3113 /* views */,
 				CA7B764B299FC1C3006B3113 /* viewmodels */,
@@ -341,13 +374,16 @@
 				7555FF83242A565900829871 /* MainView.swift in Sources */,
 				CA307202299FF45B0036DA74 /* CalendarScreen.swift in Sources */,
 				CA7B765C299FC6A5006B3113 /* WallpapersViewModel.swift in Sources */,
+				CA30721629A1289F0036DA74 /* WallpaperMapper.swift in Sources */,
 				CA30720929A00BDF0036DA74 /* WallpaperViewModel.swift in Sources */,
 				CA7B765E299FC6C4006B3113 /* BaseViewModel.swift in Sources */,
 				CA30720729A00A9F0036DA74 /* BookmarksViewModel.swift in Sources */,
 				CA3071FE299FF3D20036DA74 /* StringLocalized.swift in Sources */,
+				CA30720E29A0434B0036DA74 /* Tab.swift in Sources */,
 				CA7B766A299FC8C8006B3113 /* ViewModelsModule.swift in Sources */,
 				CA7B7650299FC361006B3113 /* WallpapersScreen.swift in Sources */,
 				CA7B7661299FC74D006B3113 /* WallpaperIdentifiable.swift in Sources */,
+				CA30721329A1281D0036DA74 /* Logger.swift in Sources */,
 				CA30720B29A011930036DA74 /* NotificationCenterNames.swift in Sources */,
 				CA7B766D299FDCBF006B3113 /* ColorExtension.swift in Sources */,
 				CA307204299FF5270036DA74 /* SettingsScreen.swift in Sources */,
@@ -409,6 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -464,6 +501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -480,12 +518,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = UPKGC7JB4J;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,12 +549,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = UPKGC7JB4J;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

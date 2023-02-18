@@ -11,13 +11,15 @@ import shared
 
 class WallpapersViewModel : BaseViewModel {
     
-    var interactor: WallpaperInteractor
+    private let PREFETCH_DISTANCE = 4
     
     @Published
     var wallpapers: [WallpaperIdentifiable] = []
     
-    var pageSize: Int = 10    
-    var currentPage: Int = 1
+    private var interactor: WallpaperInteractor
+    
+    private var pageSize: Int = 10
+    private var currentPage: Int = 1
     
     init(interactor: WallpaperInteractor) {
         self.interactor = interactor
@@ -31,10 +33,11 @@ class WallpapersViewModel : BaseViewModel {
     func fetch() {
         if isLoading { return }
         
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "America/New_York")!
         
-        if let startDate = Calendar.current.date(byAdding: DateComponents(day: -1 * currentPage * (pageSize - 1)), to: Date()),
-           let endDate = Calendar.current.date(byAdding: DateComponents(day: -1 * (currentPage - 1) * pageSize), to: Date()) {
+        if let startDate = calendar.date(byAdding: DateComponents(day: -1 * currentPage * (pageSize - 1)), to: Date()),
+           let endDate = calendar.date(byAdding: DateComponents(day: -1 * (currentPage - 1) * pageSize), to: Date()) {
             
             let startDateComponents = calendar.dateComponents([.year, .month, .day], from: startDate)
             let endDateComponents = calendar.dateComponents([.year, .month, .day], from: endDate)
@@ -44,8 +47,9 @@ class WallpapersViewModel : BaseViewModel {
                 from: DateModel(year: Int32(startDateComponents.year ?? 1970), month: Int32(startDateComponents.month ?? 1), day: Int32(startDateComponents.day ?? 1)),
                 to: DateModel(year: Int32(endDateComponents.year ?? 1970), month: Int32(endDateComponents.month ?? 1), day: Int32(endDateComponents.day ?? 1))
             ) { result, error in
-                if let result = result as? Result {
-                    if (result.isSuccess){
+                
+                if let result = result {
+                    if result.isSuccess {
                         let list = (result.data as? [WallpaperModel] ?? [])
                             .map({ model in
                                 WallpaperIdentifiable(
@@ -56,7 +60,8 @@ class WallpapersViewModel : BaseViewModel {
                                     mediaType: model.mediaType,
                                     serviceVersion: model.serviceVersion,
                                     title: model.title,
-                                    url: model.url
+                                    url: model.url,
+                                    uri: model.uri
                                 )
                             })
                             .filter { item in
@@ -65,19 +70,21 @@ class WallpapersViewModel : BaseViewModel {
                         self.wallpapers.append(contentsOf: list)
                         
                         self.currentPage += 1
-                        
-                        self.hideLoading()
                     } else {
-                        Logger.shared.e(msg: result.ex?.message)
-                        //                    Logger.e(result.ex?.message)
-                        self.hideLoading()
+                        Logger.e(result.ex)
                     }
                 }
-                if (error != nil){
-                    //                Logger.e(error)
-                    self.hideLoading()
+                if error != nil {
+                    Logger.e(error)
                 }
+                self.hideLoading()
             }
+        }
+    }
+    
+    func refresh(index: Int) {
+        if index > self.wallpapers.count - PREFETCH_DISTANCE {
+            fetch()
         }
     }
 }

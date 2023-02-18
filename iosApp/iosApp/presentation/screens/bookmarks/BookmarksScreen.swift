@@ -14,7 +14,7 @@ struct BookmarksScreen: View {
     var viewModel = getBookmarksViewModel()
     
     @Binding
-    var tabSelection: Int
+    var tabSelection: Tab
     
     let bookmarkNotification = NotificationCenter.default.publisher(for: .BookmarkNotification)
     
@@ -36,6 +36,7 @@ struct BookmarksScreen: View {
             }
             .padding(.horizontal)
         }
+        .navigationBarHidden(true)
         .onReceive(bookmarkNotification) { _ in
             viewModel.fetch()
         }
@@ -44,6 +45,6 @@ struct BookmarksScreen: View {
 
 struct BookmarksScreen_Previews: PreviewProvider {
     static var previews: some View {
-        BookmarksScreen(tabSelection: .constant(2))
+        BookmarksScreen(tabSelection: .constant(Tab.bookmarks))
     }
 }

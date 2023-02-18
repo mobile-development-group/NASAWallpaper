@@ -18,17 +18,22 @@ struct WallpaperDetailsView: View {
     var body: some View {
         ScrollView {
             VStack {
-                if let url = item.uri ?? item.url {
-                    AsyncImage(
-                        url: URL(string: url),
-                        content: { image in
-                            image.resizable()
-                        },
-                        placeholder: {
-                            ProgressView()
-                        }
-                    )
-                    .frame(height: 400)
+                if let path = item.uri, let image = UIImage(contentsOfFile: path) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(height: 460)
+                } else {
+                    if let url = item.url {
+                        AsyncImage(
+                            url: URL(string: url),
+                            content: { image in
+                                image.resizable()
+                            },
+                            placeholder: {
+                                ProgressView()
+                            })
+                        .frame(height: 460)
+                    }
                 }
                 
                 VStack(alignment: .leading) {
@@ -42,7 +47,7 @@ struct WallpaperDetailsView: View {
                     
                     HStack {
                         Button(action: onClickSave, label: {
-                            Image(systemName: "bookmark")
+                            Image(systemName: item.uri == nil ? "bookmark" : "bookmark.fill")
                         })
                         Button(action: onClickShare, label: {
                             Image(systemName: "square.and.arrow.up")
@@ -50,6 +55,7 @@ struct WallpaperDetailsView: View {
                         .padding(.leading, 8)
                         Button(action: onClickAsWallpaper, label: {
                             Image(systemName: "arrow.turn.up.forward.iphone.fill")
+                                .frame(width: 24, height: 24)
                         })
                         .padding(.leading, 8)
                     }

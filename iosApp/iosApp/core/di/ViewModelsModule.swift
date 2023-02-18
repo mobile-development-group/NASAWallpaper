@@ -8,6 +8,7 @@
 
 import Foundation
 import shared
+import SwiftUI
 
 func getWallpapersViewModel() -> WallpapersViewModel {
     
@@ -16,11 +17,14 @@ func getWallpapersViewModel() -> WallpapersViewModel {
     return WallpapersViewModel(interactor: interactor)
 }
 
-func getWallpaperViewModel() -> WallpaperViewModel {
+/// For make ViewModel with initial value from Screen
+func getWallpaperViewModel(item: WallpaperIdentifiable) -> StateObject<WallpaperViewModel> {
     
     let interactor = koin.get(protocol: WallpaperInteractor.self) as! WallpaperInteractor
     
-    return WallpaperViewModel(interactor: interactor)
+    let viewModel = WallpaperViewModel(interactor: interactor, data: item)
+    
+    return StateObject(wrappedValue: viewModel)
 }
 
 func getBookmarksViewModel() -> BookmarksViewModel {
