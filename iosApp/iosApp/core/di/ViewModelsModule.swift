@@ -40,3 +40,14 @@ func getBookmarksViewModel() -> BookmarksViewModel {
     
     return BookmarksViewModel(interactor: interactor)
 }
+
+func getMoreAppsViewModel() -> MoreAppsViewModel {
+    return MoreAppsViewModel()
+}
+
+func getLicensesViewModel() -> LicensesViewModel {
+    
+    let interactor = koin.get(protocol: LicenseInteractor.self) as! LicenseInteractor
+    
+    return LicensesViewModel(interactor: interactor)
+}

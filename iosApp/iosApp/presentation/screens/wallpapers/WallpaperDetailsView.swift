@@ -71,7 +71,7 @@ struct WallpaperDetailsView: View {
                     }
                     .sheet(isPresented: self.$isShowShareSheet) {
                         if let path = self.item.uri, let image = UIImage(contentsOfFile: path) {
-                            ShareSheet(text: item.title, image: image)
+                            TransactionActivityView(activityItems: [item.title, image])
                         }
                     }
                     .font(.title)

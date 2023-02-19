@@ -17,43 +17,43 @@ struct CalendarScreen: View {
     private var viewModel: CalendarViewModel = getCalendarViewModel()
     
     var body: some View {
-        if let wallpaper = viewModel.wallpaper {
-            ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .topTrailing) {
+            if let wallpaper = viewModel.wallpaper {
                 WallpaperDetailsView(
                     item: wallpaper,
                     onClickBookmark: { viewModel.toBookmark() }
                 )
-                
-                // For not use NavigationView on this screen
-                HStack {
-                    Button(
-                        action: {
-                            viewModel.random()
-                        },
-                        label: {
-                            Image(systemName: "questionmark")
-                        }
-                    )
-                    Button(
-                        action: {
-                            viewModel.random()
-                        },
-                        label: {
-                            Image(systemName: "calendar")
-                        }
-                    )
-                    .padding(.leading, 8)
-                }
-                .font(.title2)
-                .padding(.top, 54)
-                .padding(.trailing, 16)
-                
-                if viewModel.isLoading {
-                    ProgressView()
-                }
             }
-            .ignoresSafeArea()
+            
+            // For not use NavigationView on this screen
+            HStack {
+                Button(
+                    action: {
+                        viewModel.random()
+                    },
+                    label: {
+                        Image(systemName: "questionmark")
+                    }
+                )
+                Button(
+                    action: {
+                        viewModel.random()
+                    },
+                    label: {
+                        Image(systemName: "calendar")
+                    }
+                )
+                .padding(.leading, 8)
+            }
+            .font(.title2)
+            .padding(.top, 54)
+            .padding(.trailing, 16)
+            
+            if viewModel.isLoading {
+                ProgressView()
+            }
         }
+        .ignoresSafeArea()
     }
 }
 

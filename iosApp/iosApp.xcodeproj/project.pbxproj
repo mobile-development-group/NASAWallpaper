@@ -21,8 +21,6 @@
 		CA30720E29A0434B0036DA74 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30720D29A0434B0036DA74 /* Tab.swift */; };
 		CA30721329A1281D0036DA74 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721229A1281D0036DA74 /* Logger.swift */; };
 		CA30721629A1289F0036DA74 /* WallpaperMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721529A1289F0036DA74 /* WallpaperMapper.swift */; };
-		CA30722029A145BF0036DA74 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30721F29A145BF0036DA74 /* ShareSheet.swift */; };
-		CA30722229A145E90036DA74 /* ShareActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30722129A145E90036DA74 /* ShareActivityItemSource.swift */; };
 		CA30722529A1705F0036DA74 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA30722429A1705F0036DA74 /* CalendarViewModel.swift */; };
 		CA7B7650299FC361006B3113 /* WallpapersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B764F299FC361006B3113 /* WallpapersScreen.swift */; };
 		CA7B7656299FC415006B3113 /* WallpaperItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B7655299FC415006B3113 /* WallpaperItem.swift */; };
@@ -34,6 +32,21 @@
 		CA7B766A299FC8C8006B3113 /* ViewModelsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B7669299FC8C8006B3113 /* ViewModelsModule.swift */; };
 		CA7B766D299FDCBF006B3113 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7B766C299FDCBF006B3113 /* ColorExtension.swift */; };
 		CADEA82829A1857E00349A61 /* BaseWallpaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA82729A1857E00349A61 /* BaseWallpaperViewModel.swift */; };
+		CADEA82E29A18AF000349A61 /* MoreAppsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA82B29A18AF000349A61 /* MoreAppsScreen.swift */; };
+		CADEA82F29A18AF000349A61 /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA82D29A18AF000349A61 /* AboutScreen.swift */; };
+		CADEA83129A18B3000349A61 /* MoreAppsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA83029A18B3000349A61 /* MoreAppsViewModel.swift */; };
+		CADEA83329A18B6600349A61 /* MoreAppIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA83229A18B6600349A61 /* MoreAppIdentifiable.swift */; };
+		CADEA83529A18C3C00349A61 /* TransactionActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA83429A18C3C00349A61 /* TransactionActivityView.swift */; };
+		CADEA83729A18C6F00349A61 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA83629A18C6F00349A61 /* Constants.swift */; };
+		CADEA83929A18CEB00349A61 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA83829A18CEB00349A61 /* MailView.swift */; };
+		CADEA83B29A18D5C00349A61 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA83A29A18D5C00349A61 /* BundleExtension.swift */; };
+		CADEA83D29A18E3D00349A61 /* NavigationBarColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA83C29A18E3D00349A61 /* NavigationBarColorModifier.swift */; };
+		CADEA83F29A18F0E00349A61 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CADEA83E29A18F0E00349A61 /* Localizable.strings */; };
+		CADEA84229A193F500349A61 /* LicensesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA84129A193F500349A61 /* LicensesScreen.swift */; };
+		CADEA84A29A25D3B00349A61 /* licenses.json in Resources */ = {isa = PBXBuildFile; fileRef = CADEA84929A25D3B00349A61 /* licenses.json */; };
+		CADEA84C29A25DD000349A61 /* LicensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA84B29A25DD000349A61 /* LicensesViewModel.swift */; };
+		CADEA84E29A25EFE00349A61 /* LicenseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA84D29A25EFE00349A61 /* LicenseIdentifiable.swift */; };
+		CADEA85129A26DE300349A61 /* FormText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADEA85029A26DE300349A61 /* FormText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,8 +79,6 @@
 		CA30720D29A0434B0036DA74 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		CA30721229A1281D0036DA74 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		CA30721529A1289F0036DA74 /* WallpaperMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperMapper.swift; sourceTree = "<group>"; };
-		CA30721F29A145BF0036DA74 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
-		CA30722129A145E90036DA74 /* ShareActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareActivityItemSource.swift; sourceTree = "<group>"; };
 		CA30722429A1705F0036DA74 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		CA7B764F299FC361006B3113 /* WallpapersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpapersScreen.swift; sourceTree = "<group>"; };
 		CA7B7655299FC415006B3113 /* WallpaperItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperItem.swift; sourceTree = "<group>"; };
@@ -79,6 +90,21 @@
 		CA7B7669299FC8C8006B3113 /* ViewModelsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelsModule.swift; sourceTree = "<group>"; };
 		CA7B766C299FDCBF006B3113 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		CADEA82729A1857E00349A61 /* BaseWallpaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWallpaperViewModel.swift; sourceTree = "<group>"; };
+		CADEA82B29A18AF000349A61 /* MoreAppsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreAppsScreen.swift; sourceTree = "<group>"; };
+		CADEA82D29A18AF000349A61 /* AboutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
+		CADEA83029A18B3000349A61 /* MoreAppsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewModel.swift; sourceTree = "<group>"; };
+		CADEA83229A18B6600349A61 /* MoreAppIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppIdentifiable.swift; sourceTree = "<group>"; };
+		CADEA83429A18C3C00349A61 /* TransactionActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionActivityView.swift; sourceTree = "<group>"; };
+		CADEA83629A18C6F00349A61 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CADEA83829A18CEB00349A61 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		CADEA83A29A18D5C00349A61 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
+		CADEA83C29A18E3D00349A61 /* NavigationBarColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarColorModifier.swift; sourceTree = "<group>"; };
+		CADEA83E29A18F0E00349A61 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CADEA84129A193F500349A61 /* LicensesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesScreen.swift; sourceTree = "<group>"; };
+		CADEA84929A25D3B00349A61 /* licenses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = licenses.json; sourceTree = "<group>"; };
+		CADEA84B29A25DD000349A61 /* LicensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesViewModel.swift; sourceTree = "<group>"; };
+		CADEA84D29A25EFE00349A61 /* LicenseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseIdentifiable.swift; sourceTree = "<group>"; };
+		CADEA85029A26DE300349A61 /* FormText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,14 +146,13 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				CA7B766B299FDCAD006B3113 /* extensions */,
 				CA7B7648299FC17D006B3113 /* core */,
 				CA30721429A128890036DA74 /* domain */,
 				CA7B7649299FC19C006B3113 /* presentation */,
-				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+				CADEA84829A25CD800349A61 /* resources */,
 				7555FF82242A565900829871 /* MainView.swift */,
-				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				7555FF8C242A565B00829871 /* Info.plist */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
@@ -167,8 +192,8 @@
 		CA30721E29A145B60036DA74 /* sheets */ = {
 			isa = PBXGroup;
 			children = (
-				CA30721F29A145BF0036DA74 /* ShareSheet.swift */,
-				CA30722129A145E90036DA74 /* ShareActivityItemSource.swift */,
+				CADEA83429A18C3C00349A61 /* TransactionActivityView.swift */,
+				CADEA83829A18CEB00349A61 /* MailView.swift */,
 			);
 			path = sheets;
 			sourceTree = "<group>";
@@ -179,6 +204,7 @@
 				CA30721029A127E20036DA74 /* utils */,
 				CA7B7668299FC8BB006B3113 /* di */,
 				CA30720A29A011930036DA74 /* NotificationCenterNames.swift */,
+				CADEA83629A18C6F00349A61 /* Constants.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -186,10 +212,11 @@
 		CA7B7649299FC19C006B3113 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				CADEA84F29A26DD600349A61 /* views */,
 				CA30721E29A145B60036DA74 /* sheets */,
 				CA30720C29A0433D0036DA74 /* navigation */,
 				CA7B765F299FC72B006B3113 /* identifiables */,
-				CA7B764C299FC1D1006B3113 /* views */,
+				CA7B764C299FC1D1006B3113 /* extensions */,
 				CA7B764B299FC1C3006B3113 /* viewmodels */,
 				CA7B764A299FC1B7006B3113 /* screens */,
 			);
@@ -199,7 +226,9 @@
 		CA7B764A299FC1B7006B3113 /* screens */ = {
 			isa = PBXGroup;
 			children = (
-				CA7B7654299FC400006B3113 /* more */,
+				CADEA84029A193E900349A61 /* licenses */,
+				CADEA82C29A18AF000349A61 /* about */,
+				CADEA82A29A18AF000349A61 /* more */,
 				CA7B7653299FC3F7006B3113 /* settings */,
 				CA7B7652299FC3DE006B3113 /* calendar */,
 				CA7B7651299FC3CB006B3113 /* bookmarks */,
@@ -217,15 +246,21 @@
 				CA7B765B299FC6A5006B3113 /* WallpapersViewModel.swift */,
 				CA30720629A00A9F0036DA74 /* BookmarksViewModel.swift */,
 				CA30722429A1705F0036DA74 /* CalendarViewModel.swift */,
+				CADEA83029A18B3000349A61 /* MoreAppsViewModel.swift */,
+				CADEA84B29A25DD000349A61 /* LicensesViewModel.swift */,
 			);
 			path = viewmodels;
 			sourceTree = "<group>";
 		};
-		CA7B764C299FC1D1006B3113 /* views */ = {
+		CA7B764C299FC1D1006B3113 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CA7B766C299FDCBF006B3113 /* ColorExtension.swift */,
+				CA3071FD299FF3D20036DA74 /* StringLocalized.swift */,
+				CADEA83A29A18D5C00349A61 /* BundleExtension.swift */,
+				CADEA83C29A18E3D00349A61 /* NavigationBarColorModifier.swift */,
 			);
-			path = views;
+			path = extensions;
 			sourceTree = "<group>";
 		};
 		CA7B764E299FC34C006B3113 /* wallpapers */ = {
@@ -263,17 +298,12 @@
 			path = settings;
 			sourceTree = "<group>";
 		};
-		CA7B7654299FC400006B3113 /* more */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = more;
-			sourceTree = "<group>";
-		};
 		CA7B765F299FC72B006B3113 /* identifiables */ = {
 			isa = PBXGroup;
 			children = (
 				CA7B7660299FC74D006B3113 /* WallpaperIdentifiable.swift */,
+				CADEA83229A18B6600349A61 /* MoreAppIdentifiable.swift */,
+				CADEA84D29A25EFE00349A61 /* LicenseIdentifiable.swift */,
 			);
 			path = identifiables;
 			sourceTree = "<group>";
@@ -286,13 +316,46 @@
 			path = di;
 			sourceTree = "<group>";
 		};
-		CA7B766B299FDCAD006B3113 /* extensions */ = {
+		CADEA82A29A18AF000349A61 /* more */ = {
 			isa = PBXGroup;
 			children = (
-				CA7B766C299FDCBF006B3113 /* ColorExtension.swift */,
-				CA3071FD299FF3D20036DA74 /* StringLocalized.swift */,
+				CADEA82B29A18AF000349A61 /* MoreAppsScreen.swift */,
 			);
-			path = extensions;
+			path = more;
+			sourceTree = "<group>";
+		};
+		CADEA82C29A18AF000349A61 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				CADEA82D29A18AF000349A61 /* AboutScreen.swift */,
+			);
+			path = about;
+			sourceTree = "<group>";
+		};
+		CADEA84029A193E900349A61 /* licenses */ = {
+			isa = PBXGroup;
+			children = (
+				CADEA84129A193F500349A61 /* LicensesScreen.swift */,
+			);
+			path = licenses;
+			sourceTree = "<group>";
+		};
+		CADEA84829A25CD800349A61 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				CADEA84929A25D3B00349A61 /* licenses.json */,
+				CADEA83E29A18F0E00349A61 /* Localizable.strings */,
+				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		CADEA84F29A26DD600349A61 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				CADEA85029A26DE300349A61 /* FormText.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,7 +419,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
+				CADEA83F29A18F0E00349A61 /* Localizable.strings in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
+				CADEA84A29A25D3B00349A61 /* licenses.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,29 +452,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA30722229A145E90036DA74 /* ShareActivityItemSource.swift in Sources */,
 				CA7B765A299FC4B9006B3113 /* WallpaperScreen.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				CADEA84C29A25DD000349A61 /* LicensesViewModel.swift in Sources */,
 				CA307200299FF40A0036DA74 /* BookmarksScreen.swift in Sources */,
 				CA7B7656299FC415006B3113 /* WallpaperItem.swift in Sources */,
 				7555FF83242A565900829871 /* MainView.swift in Sources */,
+				CADEA84229A193F500349A61 /* LicensesScreen.swift in Sources */,
 				CA307202299FF45B0036DA74 /* CalendarScreen.swift in Sources */,
+				CADEA83929A18CEB00349A61 /* MailView.swift in Sources */,
 				CA7B765C299FC6A5006B3113 /* WallpapersViewModel.swift in Sources */,
+				CADEA83529A18C3C00349A61 /* TransactionActivityView.swift in Sources */,
+				CADEA84E29A25EFE00349A61 /* LicenseIdentifiable.swift in Sources */,
+				CADEA83729A18C6F00349A61 /* Constants.swift in Sources */,
 				CA30721629A1289F0036DA74 /* WallpaperMapper.swift in Sources */,
 				CA30720929A00BDF0036DA74 /* WallpaperViewModel.swift in Sources */,
 				CA30722529A1705F0036DA74 /* CalendarViewModel.swift in Sources */,
+				CADEA82F29A18AF000349A61 /* AboutScreen.swift in Sources */,
 				CA7B765E299FC6C4006B3113 /* BaseViewModel.swift in Sources */,
+				CADEA83129A18B3000349A61 /* MoreAppsViewModel.swift in Sources */,
 				CA30720729A00A9F0036DA74 /* BookmarksViewModel.swift in Sources */,
 				CA3071FE299FF3D20036DA74 /* StringLocalized.swift in Sources */,
+				CADEA83B29A18D5C00349A61 /* BundleExtension.swift in Sources */,
 				CA30720E29A0434B0036DA74 /* Tab.swift in Sources */,
 				CA7B766A299FC8C8006B3113 /* ViewModelsModule.swift in Sources */,
 				CA7B7650299FC361006B3113 /* WallpapersScreen.swift in Sources */,
+				CADEA83329A18B6600349A61 /* MoreAppIdentifiable.swift in Sources */,
 				CA7B7661299FC74D006B3113 /* WallpaperIdentifiable.swift in Sources */,
 				CA30721329A1281D0036DA74 /* Logger.swift in Sources */,
+				CADEA85129A26DE300349A61 /* FormText.swift in Sources */,
+				CADEA82E29A18AF000349A61 /* MoreAppsScreen.swift in Sources */,
 				CADEA82829A1857E00349A61 /* BaseWallpaperViewModel.swift in Sources */,
 				CA30720B29A011930036DA74 /* NotificationCenterNames.swift in Sources */,
 				CA7B766D299FDCBF006B3113 /* ColorExtension.swift in Sources */,
-				CA30722029A145BF0036DA74 /* ShareSheet.swift in Sources */,
+				CADEA83D29A18E3D00349A61 /* NavigationBarColorModifier.swift in Sources */,
 				CA307204299FF5270036DA74 /* SettingsScreen.swift in Sources */,
 				CA7B7658299FC4A9006B3113 /* WallpaperDetailsView.swift in Sources */,
 			);
@@ -541,6 +617,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = UPKGC7JB4J;
 				ENABLE_PREVIEWS = YES;
@@ -550,12 +627,14 @@
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "NASA Wallpapers";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -573,6 +652,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = UPKGC7JB4J;
 				ENABLE_PREVIEWS = YES;
@@ -582,12 +662,14 @@
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "NASA Wallpapers";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

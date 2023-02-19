@@ -1,0 +1,26 @@
+[
+  {
+    "title": "NASA",
+    "url": "https://www.nasa.gov/multimedia/guidelines/index.html"
+  },
+  {
+    "title": "Ktor",
+    "url": "https://github.com/ktorio/ktor"
+  },
+  {
+    "title": "KotlinX Coroutines",
+    "url": "https://github.com/Kotlin/kotlinx.coroutines"
+  },
+  {
+    "title": "Koin",
+    "url": "https://github.com/InsertKoinIO/koin"
+  },
+  {
+    "title": "KotlinX Datetime",
+    "url": "https://github.com/Kotlin/kotlinx-datetime"
+  },
+  {
+    "title": "SQLDelight",
+    "url": "https://github.com/cashapp/sqldelight"
+  }
+]
