@@ -1,0 +1,49 @@
+
+// Tabs
+"wallpapers" = "Wallpapers";
+"calendar" = "Calendar";
+"bookmarks" = "Bookmarks";
+"settings" = "Settings";
+
+// Settings
+"other" = "Other";
+"report_error" = "Report error";
+"developer_email" = "md101110group@gmail.com";
+"rate_app" = "Rate app";
+"about_app" = "About";
+"more_apps" = "More applications";
+
+"version" = "Version";
+
+"error" = "Error";
+"cant_send_email" = "Failed to send email";
+
+// About app
+"about_app_description" = "
+NASA Wallpapers - app for view Astronomy Picture of the Day photo from NASA
+
+Features:
+• Get high-definition daily NASA APOD photos delivered right to your device.
+• View additional info on every photo or video and share with friends.
+• Save photos as device wallpaper.
+• Browse, search, and view all previous APOD items.
+• Bookmarks with your like photos.
+
+Enjoy the universe around you each and every day with the all new SpaceGeek APOD for iOS.
+
+The copyright owner of the photo is listed below the photos. If the copyright owner is not specified, the copyright belongs to NASA.
+";
+"legal_information" = "Legal information";
+"privacy_policy" = "Privacy Policy";
+"privacy_policy_url" = "https://sites.google.com/view/ad-stat/privacy-policy";
+"terms_of_use" = "Terms of Use";
+"terms_of_use_url" = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula";
+"licenses" = "Licenses";
+
+"open_on_github" = "Open on GitHub";
+"github_url" = "https://github.com/mobile-development-group/NASAWallpaper";
+
+"share_app" = "Share app";
+
+// More apps
+"open_in_store" = "Open in App Store";
