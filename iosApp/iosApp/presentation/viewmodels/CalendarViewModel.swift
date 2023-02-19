@@ -11,13 +11,23 @@ import shared
 
 class CalendarViewModel: BaseWallpaperViewModel {
     
+    @Published
+    var startDate: Date
+    
+    @Published
+    var endDate: Date
+    
     private var calendar = Calendar.current
     
     override init(interactor: WallpaperInteractor) {
-        super.init(interactor: interactor)
-        
         calendar.timeZone = TimeZone(identifier: "America/New_York")!
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
+        
+        startDate = calendar.date(from: DateComponents(year: 1995, month: 6, day: 16))!
+        endDate = calendar.startOfDay(for: Date())
+        
+        super.init(interactor: interactor)
+        
         self.fetch(date: DateModel(year: Int32(components.year ?? 1995), month: Int32(components.month ?? 6), day: Int32(components.day ?? 16)))
     }
     
@@ -53,6 +63,12 @@ class CalendarViewModel: BaseWallpaperViewModel {
         }
         
         self.fetch(date: DateModel(year: Int32(year), month: Int32(month), day: Int32(day)))
+    }
+    
+    func fetch(date: Date) {
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        
+        fetch(date: DateModel(year: Int32(components.year!), month: Int32(components.month!), day: Int32(components.day!)))
     }
     
     private func fetch(date: DateModel) {

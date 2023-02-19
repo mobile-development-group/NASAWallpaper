@@ -16,6 +16,9 @@ struct CalendarScreen: View {
     @StateObject
     private var viewModel: CalendarViewModel = getCalendarViewModel()
     
+    @State
+    var date: Date = Date()
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
             if let wallpaper = viewModel.wallpaper {
@@ -35,15 +38,20 @@ struct CalendarScreen: View {
                         Image(systemName: "questionmark")
                     }
                 )
-                Button(
-                    action: {
-                        viewModel.random()
-                    },
-                    label: {
-                        Image(systemName: "calendar")
-                    }
+                DatePicker(
+                    "",
+                    selection: $date,
+                    in: viewModel.startDate...viewModel.endDate,
+                    displayedComponents: .date
                 )
-                .padding(.leading, 8)
+                .onChange(of: date) { date in
+                    viewModel.fetch(date: date)
+                }
+                .colorInvert()
+                .colorMultiply(Color.white)
+                .frame(width: 90)
+                .padding(.leading, 12)
+                .padding(.trailing, 16)
             }
             .font(.title2)
             .padding(.top, 54)
