@@ -1,4 +1,4 @@
-package com.mdgroup.nasawallpapers.presentation.screens.settings
+package com.mdgroup.nasawallpapers.presentation.screens.licenses
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column

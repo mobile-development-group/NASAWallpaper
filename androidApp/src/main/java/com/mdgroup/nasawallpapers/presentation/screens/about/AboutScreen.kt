@@ -1,4 +1,4 @@
-package com.mdgroup.nasawallpapers.presentation.screens.settings
+package com.mdgroup.nasawallpapers.presentation.screens.about
 
 import android.content.res.Configuration
 import android.graphics.Bitmap

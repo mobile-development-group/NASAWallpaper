@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.mdgroup.nasawallpapers.presentation.BottomSheetController
 import com.mdgroup.nasawallpapers.presentation.navigation.Router
+import com.mdgroup.nasawallpapers.presentation.screens.about.AboutScreen
+import com.mdgroup.nasawallpapers.presentation.screens.licenses.LicensesScreen
 import com.mdgroup.nasawallpapers.presentation.screens.more.MoreAppsScreen
 
 @ExperimentalMaterialApi
