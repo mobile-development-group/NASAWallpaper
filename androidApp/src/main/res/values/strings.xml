@@ -41,7 +41,7 @@ The copyright owner of the photo is listed below the photos. If the copyright ow
     </string>
     <string name="legal_information">Legal information</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="privacy_policy_url">"https://sites.google.com/view/ad-stat/privacy-policy"</string>
+    <string name="privacy_policy_url">""</string>
     <string name="licenses">Licenses</string>
     <string name="open_on_github">Open on GitHub</string>
     <string name="github_url">"https://github.com/mobile-development-group/NASAWallpaper"</string>
