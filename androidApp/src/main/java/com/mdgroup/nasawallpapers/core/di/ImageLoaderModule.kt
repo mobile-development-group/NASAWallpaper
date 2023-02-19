@@ -6,7 +6,7 @@ import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import org.koin.dsl.module
 
-private const val CACHE_SIZE_LIMIT = (150 * 1024 * 1024)
+private const val CACHE_SIZE_LIMIT = (1500 * 1024 * 1024)
 
 val imageLoaderModule = module {
     single<ImageLoader> { makeImageLoader(get<Context>()) }

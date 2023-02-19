@@ -1,7 +1,6 @@
 package com.mdgroup.nasawallpapers.presentation.screens.wallpapers
 
 import android.content.Context
-import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,15 +11,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
+import coil.compose.rememberImagePainter
 import com.mdgroup.nasawallpapers.R
-import com.mdgroup.nasawallpapers.core.utils.FileUtils
 import com.mdgroup.nasawallpapers.core.utils.nullIfEmpty
 import com.mdgroup.nasawallpapers.domain.models.WallpaperModel
 import org.koin.androidx.compose.inject
@@ -46,16 +44,14 @@ fun WallpaperDetailsView(
     ) {
         item {
             wallpaper.uri?.let { uri ->
-                FileUtils.bitmapFromUri(context, Uri.parse(uri))?.asImageBitmap()?.let {
-                    Image(
-                        bitmap = it,
-                        contentDescription = wallpaper.title,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(400.dp),
-                        contentScale = ContentScale.Crop
-                    )
-                }
+                Image(
+                    painter = rememberImagePainter(uri),
+                    contentDescription = wallpaper.title,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(400.dp),
+                    contentScale = ContentScale.Crop
+                )
             } ?: run {
                 AsyncImage(
                     model = wallpaper.url,
