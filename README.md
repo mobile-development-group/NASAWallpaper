@@ -10,11 +10,11 @@
 NASA Wallpapers - app for view Astronomy Picture of the Day photo from NASA
 
 Features:
-• Get high-definition daily NASA APOD photos delivered right to your device.
-• View additional info on every photo or video and share with friends.
-• Save photos as device wallpaper.
-• Browse, search, and view all previous APOD items.
-• Bookmarks with your like photos. 
+- Get high-definition daily NASA APOD photos delivered right to your device.
+- View additional info on every photo or video and share with friends.
+- Save photos as device wallpaper.
+- Browse, search, and view all previous APOD items.
+- Bookmarks with your like photos. 
 
 Enjoy the universe around you each and every day with the all new SpaceGeek APOD for iOS.
 
