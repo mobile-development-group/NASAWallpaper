@@ -1,4 +1,4 @@
-package com.mdgroup.nasawallpapers.presentation.screens.settings
+package com.mdgroup.nasawallpapers.presentation.navigation.graphs
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
@@ -10,11 +10,13 @@ import com.mdgroup.nasawallpapers.presentation.navigation.Router
 import com.mdgroup.nasawallpapers.presentation.screens.about.AboutScreen
 import com.mdgroup.nasawallpapers.presentation.screens.licenses.LicensesScreen
 import com.mdgroup.nasawallpapers.presentation.screens.more.MoreAppsScreen
+import com.mdgroup.nasawallpapers.presentation.screens.settings.SettingsScreen
 
 @ExperimentalMaterialApi
 @Composable
 fun SettingsGraph(navController: NavHostController, bottomSheetController: BottomSheetController) {
     NavHost(navController, startDestination = Router.SETTINGS) {
+
         composable(route = Router.SETTINGS) {
             SettingsScreen(navController, bottomSheetController)
         }
@@ -22,6 +24,7 @@ fun SettingsGraph(navController: NavHostController, bottomSheetController: Botto
         composable(route = Router.ABOUT_APP) {
             AboutScreen(navController)
         }
+
         composable(route = Router.LICENSES) {
             LicensesScreen(navController)
         }
@@ -29,5 +32,6 @@ fun SettingsGraph(navController: NavHostController, bottomSheetController: Botto
         composable(route = Router.MORE_APPS) {
             MoreAppsScreen(navController)
         }
+
     }
 }

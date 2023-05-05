@@ -1,4 +1,4 @@
-package com.mdgroup.nasawallpapers.presentation.screens.wallpapers
+package com.mdgroup.nasawallpapers.presentation.navigation.graphs
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
@@ -7,8 +7,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.mdgroup.nasawallpapers.presentation.navigation.Router
+import com.mdgroup.nasawallpapers.presentation.screens.wallpapers.WallpaperScreen
+import com.mdgroup.nasawallpapers.presentation.screens.wallpapers.WallpapersScreen
 
 @ExperimentalMaterialApi
 @Composable

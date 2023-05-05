@@ -18,10 +18,10 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.mdgroup.nasawallpapers.presentation.navigation.GraphFactory
 import com.mdgroup.nasawallpapers.presentation.navigation.NavigationItem
-import com.mdgroup.nasawallpapers.presentation.screens.bookmarks.BookmarksGraph
+import com.mdgroup.nasawallpapers.presentation.navigation.graphs.BookmarksGraph
+import com.mdgroup.nasawallpapers.presentation.navigation.graphs.SettingsGraph
+import com.mdgroup.nasawallpapers.presentation.navigation.graphs.WallpapersGraph
 import com.mdgroup.nasawallpapers.presentation.screens.calendar.CalendarScreen
-import com.mdgroup.nasawallpapers.presentation.screens.settings.SettingsGraph
-import com.mdgroup.nasawallpapers.presentation.screens.wallpapers.WallpapersGraph
 
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
