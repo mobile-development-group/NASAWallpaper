@@ -1,5 +1,5 @@
 //
-//  WallpapersModule.swift
+//  ViewModelsModule.swift
 //  iosApp
 //
 //  Created by Pavlo Kravchenko on 17.02.2023.
@@ -17,14 +17,13 @@ func getWallpapersViewModel() -> WallpapersViewModel {
     return WallpapersViewModel(interactor: interactor)
 }
 
-/// For make ViewModel with initial value from Screen
-func getWallpaperViewModel(item: WallpaperIdentifiable) -> StateObject<WallpaperViewModel> {
+func getWallpaperViewModel(item: WallpaperIdentifiable) -> WallpaperViewModel {
     
     let interactor = koin.get(protocol: WallpaperInteractor.self) as! WallpaperInteractor
     
     let viewModel = WallpaperViewModel(interactor: interactor, data: item)
     
-    return StateObject(wrappedValue: viewModel)
+    return viewModel
 }
 
 func getCalendarViewModel() -> CalendarViewModel {

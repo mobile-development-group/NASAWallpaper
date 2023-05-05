@@ -52,9 +52,8 @@ struct WallpaperDetailsView: View {
                         })
                         
                         if #available(iOS 16.0, *) {
-                            if let path = item.uri,
-                               let uiImage = UIImage(contentsOfFile: path),
-                               let image = Image(uiImage: uiImage) {
+                            if let path = item.uri, let uiImage = UIImage(contentsOfFile: path) {
+                                let image = Image(uiImage: uiImage)
                                 ShareLink(item: image, preview: SharePreview(item.title, image: image)) {
                                     Image(systemName: "square.and.arrow.up")
                                 }

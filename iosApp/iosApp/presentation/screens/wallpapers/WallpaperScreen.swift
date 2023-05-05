@@ -14,7 +14,7 @@ struct WallpaperScreen: View {
     var viewModel: WallpaperViewModel
     
     init(item: WallpaperIdentifiable) {
-        self._viewModel = getWallpaperViewModel(item: item)
+        self._viewModel = StateObject(wrappedValue: getWallpaperViewModel(item: item))
     }
     
     var body: some View {
