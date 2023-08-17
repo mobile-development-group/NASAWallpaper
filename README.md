@@ -6,6 +6,7 @@
 ![status](https://img.shields.io/badge/status-stable-green.svg)
 ![iOS](https://img.shields.io/badge/iOS-15.0%2B-green.svg)
 ![Android](https://img.shields.io/badge/Android-8.0%2B-green.svg)
+[![Made in Ukraine](https://img.shields.io/badge/made_in-ukraine-ffd700.svg?labelColor=0057b7)](https://stand-with-ukraine.pp.ua)
 
 NASA Wallpapers - app for view Astronomy Picture of the Day photo from NASA
 
